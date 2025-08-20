@@ -1,10 +1,10 @@
 import { Burger, Container, Group, Image, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconChartBar, IconHome, IconUsers } from '@tabler/icons-react';
+import { IconChartBar, IconHome, IconLogin2, IconPencilUp, IconUsers } from '@tabler/icons-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import finTalkLogo from '../../assets/fin-talk-logo.png';
 import classes from './Navbar.module.css';
-import { useNavigate } from 'react-router';
 
 type Item = {
     link: string,
@@ -18,6 +18,8 @@ const links: Item[] = [
     { link: '/feed', label: 'Feed', icon: <IconUsers size={20} /> },
     // { link: '/', label: 'Feed', icon: <IconUsers size={20} /> },
     { link: '/statistics', label: 'Statistics', icon: <IconChartBar size={20} /> },
+    { link: '/login', label: 'Login', icon: <IconLogin2 size={20} /> },
+    { link: '/register', label: 'Register', icon: <IconPencilUp size={20} /> },
 ];
 
 export function Navbar() {

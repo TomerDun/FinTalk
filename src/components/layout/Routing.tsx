@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router";
-import { Dashboard } from "../../../pages/Dashboard";
-import { PageNotFound } from "../../../pages/PageNotFound/PageNotFound";
-import { Login } from "../../auth/Login/Login";
-import { Register } from "../../auth/Register/Register";
 import { Box } from "@mantine/core";
+import { Dashboard } from "../../pages/Dashboard";
+import { Login } from "../auth/Login/Login";
+import { Register } from "../auth/Register/Register";
+import { PageNotFound } from "../../pages/PageNotFound/PageNotFound";
 
 export function Routing() {
     return (
