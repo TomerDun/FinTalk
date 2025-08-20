@@ -4,6 +4,7 @@ import { IconChartBar, IconHome, IconUsers } from '@tabler/icons-react';
 import { useState } from 'react';
 import finTalkLogo from '../../assets/fin-talk-logo.png';
 import classes from './Navbar.module.css';
+import { useNavigate } from 'react-router';
 
 type Item = {
     link: string,
@@ -12,8 +13,10 @@ type Item = {
 }
 
 const links: Item[] = [
-    { link: '/dashboard', label: 'Dashboard', icon: <IconHome size={20} /> },
+    { link: '/', label: 'Dashboard', icon: <IconHome size={20} /> },
+    // { link: '/dashboard', label: 'Dashboard', icon: <IconHome size={20} /> },
     { link: '/feed', label: 'Feed', icon: <IconUsers size={20} /> },
+    // { link: '/', label: 'Feed', icon: <IconUsers size={20} /> },
     { link: '/statistics', label: 'Statistics', icon: <IconChartBar size={20} /> },
 ];
 
@@ -21,6 +24,7 @@ export function Navbar() {
 
     const [opened, { toggle }] = useDisclosure(false);
     const [active, setActive] = useState(links[0].link);
+    const navigate = useNavigate()
 
     const items = links.map((link) => (
         <a
@@ -31,6 +35,7 @@ export function Navbar() {
             onClick={(event) => {
                 event.preventDefault();
                 setActive(link.link);
+                navigate(link.link);
             }}
         >
             <span className={classes.itemContext}>
@@ -74,6 +79,7 @@ export function Navbar() {
                                 onClick={() => {
                                     setActive(link.link);
                                     toggle();
+                                    navigate(link.link)
                                 }}
                             >
                                 {link.label}
