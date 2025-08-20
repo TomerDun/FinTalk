@@ -19,6 +19,7 @@ export default function ArticleCard({userName, profilePicture ,createdAt, conten
         <div className="article-container">
             <div className="top-section">
                 <div className="profile-image-container">
+                    <p>U</p>
                     <img src={profilePicture} alt="" />
                 </div>
                 <div className="name-date-container">
