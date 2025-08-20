@@ -4,9 +4,9 @@
     align-items: flex-start;
     margin: auto;
     width: 550px;
-    border: 1px solid rgb(214, 214, 214);
+    border: 1px solid rgb(231, 231, 231);
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 1.5rem;
 }
 
 .top-section{
@@ -52,9 +52,12 @@
     font-size: small;
     color:#047857;
 }
+.tag-container > .tag { transition: background-color .2s ease; }
+.tag-container > .tag:hover { background-color: #b5e6d2; }
+
 
 .bottom-section{
-    border-top: 1px solid rgb(214, 214, 214);
+    border-top: 0.5px solid rgb(247, 245, 245);
     display: flex;
     width: 100%;
     gap:1rem;
@@ -64,10 +67,10 @@
 .article-button{
     display: flex;
     align-items: center;
+    gap:0.5rem;
     border:none;
     background-color: white;
+    color:rgb(105, 105, 105);
 }
+.article-button.share-button { margin-left: auto; }
 
-.share-button.article-button{
-    justify-self: flex-end;
-}

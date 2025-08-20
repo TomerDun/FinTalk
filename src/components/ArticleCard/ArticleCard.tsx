@@ -35,9 +35,9 @@ export default function ArticleCard({userName, profilePicture ,createdAt, conten
                 </div>
             </div>
             <div className="bottom-section">
-                <button className="like-button article-button"><IconHeart size={20}/></button>
-                <button className="comment-button article-button"><IconBubbleText size={20}/></button>
-                <button className="share-button article-button"><IconShare size={20}/></button>
+                <button className="like-button article-button"><IconHeart size={16}/> <p>0</p></button>
+                <button className="comment-button article-button"><IconBubbleText size={16}/><p>0</p></button>
+                <button className="share-button article-button"><IconShare size={16}/></button>
             </div>
         </div>
     )
