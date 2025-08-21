@@ -3,7 +3,7 @@
     border-radius: 4px;
     border: 1px solid var(--border-color);
     background-color: var(--bg-card);    
-    padding: 4px;
+    padding: 8px 1rem;
     margin-bottom: 1rem;
     color: var(--text-info);
     font-size: small;
@@ -13,6 +13,7 @@
     display: flex;
     justify-content: space-between;
     color: var(--text-header);
+    margin-bottom: 1.5rem;
 }
 
 .exp-name {
@@ -25,4 +26,25 @@
     color: var(--text-header);
     font-weight: 700;
     font-size: larger;
+}
+
+.expense-container .bottom-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.expense-container .bottom-row span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.expense-container .categories {
+    display: flex;
+    gap: 8px;
+}
+
+.expense-container .categories > .category {
+    color: var(--text-header);
 }
