@@ -37,6 +37,7 @@ function ArticleCreator({imgUrl}:ArticalCreatorProps){
         <div className="creator-container">
             <div className="top-section">
                 <div className="profile-image-container">
+                    <p>U</p>
                     <img src={imgUrl} alt="" />
                 </div>
                 <div className="creator-header">Share your financial insights</div>

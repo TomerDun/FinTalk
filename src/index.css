@@ -4,8 +4,9 @@
   box-sizing: border-box;
 
   --bg-main: rgb(246,248,250);
+  --bg-card: rgb(252, 253, 253);
 
-  --bg-ui-hover: rgb(244, 244, 245)
+  --bg-ui-hover: rgb(244, 244, 245);
   
   --text-header: rgb(15, 23, 42);
   --text-info: rgb(71, 85, 105);
