@@ -29,7 +29,8 @@ const expensesData:Expense[] = [
 
 // Types
 
-import { makeAutoObservable } from "mobx"
+import { makeAutoObservable, runInAction } from "mobx"
+import { fetchProfile } from "../utils/apiUtils/profileApiUtils";
 
 export type Profile = {
     id?: number,
@@ -48,16 +49,21 @@ export type Expense = {
 }
 
 class ProfileStore {
-    id?: number;
-    userName: string = '';
-    imgUrl? = '';
-    expenses: Expense[] = [];
-
-    fetchExpenses() {
-        this.expenses = expensesData;
-        console.log('--fetched expenses');        
-    }
+    activeProfile:Profile | null = null
+    expenses: Expense[] | null = [];
     
+    async getActiveProfile() {
+        const newProfile = await fetchProfile();
+        
+        
+        runInAction(() => {
+            this.activeProfile = newProfile;            
+        })
+
+        console.log('--updated user profile--');
+        
+        
+    }
 
     constructor() {
         makeAutoObservable(this)
