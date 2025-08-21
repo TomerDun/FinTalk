@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { fetchProfile } from "../../utils/apiUtils/profileApiUtils";
 import { fetchProfileExpenses } from "../../utils/apiUtils/expenseApiUtils";
 
+// TEMP - REMOVE THIS
 function DashboardPage() {    
     useEffect(() => {
         fetchProfile();
