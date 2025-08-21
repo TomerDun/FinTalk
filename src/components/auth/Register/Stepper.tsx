@@ -147,9 +147,23 @@ export default function Stepper({
                 </button>
               )}
               <button
-                onClick={isLastStep ? handleComplete : handleNext}
+                {...{ ...nextButtonProps, onClick: undefined }}
                 className="next-button"
-                {...nextButtonProps}
+                onClick={(e) => {
+                  // Execute custom onClick first if provided
+                  if (nextButtonProps.onClick) {
+                    nextButtonProps.onClick(e);
+                  }
+                  
+                  // Then execute the default stepper logic (unless prevented)
+                  if (!e.defaultPrevented) {
+                    if (isLastStep) {
+                      handleComplete();
+                    } else {
+                      handleNext();
+                    }
+                  }
+                }}
               >
                 {isLastStep ? "Complete" : nextButtonText}
               </button>
@@ -281,9 +295,9 @@ function StepIndicator({
     >
       <motion.div
         variants={{
-          inactive: { scale: 1, backgroundColor: "#222", color: "#a3a3a3" },
-          active: { scale: 1, backgroundColor: "#5227FF", color: "#5227FF" },
-          complete: { scale: 1, backgroundColor: "#5227FF", color: "#3b82f6" },
+          inactive: { scale: 1, backgroundColor: "var(--text-positive)", color: "#fff" },
+          active: { scale: 1, backgroundColor: "var(--nav-text)", color: "black" },
+          complete: { scale: 1, backgroundColor: "var(--nav-text)", color: "#3b82f6" },
         }}
         transition={{ duration: 0.3 }}
         className="step-indicator-inner"
@@ -307,7 +321,7 @@ interface StepConnectorProps {
 function StepConnector({ isComplete }: StepConnectorProps) {
   const lineVariants: Variants = {
     incomplete: { width: 0, backgroundColor: "#52525b" },
-    complete: { width: "100%", backgroundColor: "#5227FF" },
+    complete: { width: "100%", backgroundColor: "var(--nav-text)" },
   };
 
   return (
