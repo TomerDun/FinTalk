@@ -7,10 +7,16 @@ import './ExpenseList.css';
 function ExpensesList() {
     return (
         <div className="expenses-list-container">
-            <div className="header-container">
-                $ Recent Expenses ({profileStore.expenses.length})
-            </div>
-            {profileStore.expenses.map((ex, i) => <ExpenseCard expense={ex} key={i}/>)}
+            {profileStore.expenses ?
+                <>
+                    <div className="header-container">
+                        $ Recent Expenses ({profileStore.expenses.length})
+                    </div>
+                    {profileStore.expenses.map((expense, i) => <ExpenseCard expense={expense} key={i} />)}
+                </>
+                : 
+                null
+            }
         </div>
     )
 }
