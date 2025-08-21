@@ -19,6 +19,9 @@ export type Expense = {
 }
 
 class ProfileStore {
+    id?: number;
+    userName: string = '';
+    imgUrl? = '';
     expenses: Expense[] | null = [];
     
 
@@ -26,3 +29,5 @@ class ProfileStore {
         makeAutoObservable(this)
     }
 }
+
+export const profileStore = new ProfileStore()
