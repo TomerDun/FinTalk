@@ -1,3 +1,32 @@
+// --TEMP--
+const expensesData:Expense[] = [
+    {
+        id: 1,
+        profileId: 5,
+        amount: 500,
+        category: 'Car',
+        subCategory: 'Fuel',
+        createdAt: new Date()
+    },
+    {
+        id: 2,
+        profileId: 5,
+        amount: 1500,
+        category: 'Car',
+        subCategory: 'Repairs',
+        createdAt: new Date()
+    },
+    {
+        id: 3,
+        profileId: 5,
+        amount: 700,
+        category: 'Food',
+        subCategory: 'Restraunt',
+        createdAt: new Date()
+    },
+]
+
+
 // Types
 
 import { makeAutoObservable } from "mobx"
@@ -22,7 +51,12 @@ class ProfileStore {
     id?: number;
     userName: string = '';
     imgUrl? = '';
-    expenses: Expense[] | null = [];
+    expenses: Expense[] = [];
+
+    fetchExpenses() {
+        this.expenses = expensesData;
+        console.log('--fetched expenses');        
+    }
     
 
     constructor() {

@@ -1,7 +1,17 @@
+import { observer } from "mobx-react-lite";
 import ExpensesList from "../../components/exponsesArea/ExpensesList/ExpensesList";
+import { useEffect } from "react";
+import { profileStore } from "../../stores/ProfileStore";
 
-export default function DashboardPage() {
+function DashboardPage() {
+
+    useEffect(() => {
+        profileStore.fetchExpenses();
+    }, [])
+
     return (
+
+
 
         <div className="dashboard-page">
             <div className="header-area">
@@ -11,10 +21,12 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="expenses-list container">
-                    <ExpensesList expenses={[]}/>
+                    <ExpensesList />
                 </div>
             </div>
         </div>
 
     )
 }
+
+export default observer(DashboardPage)
