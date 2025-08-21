@@ -1,17 +1,24 @@
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import ArticleCreator from "../../components/ArticleCreator/ArticleCreator";
-import { useState } from "react";
-import {type ArticleData } from "../../components/ArticleCreator/ArticleCreator";
+import { articleStore } from "../../stores/ArticleStore";
+import { observer } from "mobx-react-lite";
+import "./FeedPage.css"
 
-export default function FeedPage(){
-    const [articles, setArticles] = useState([]);
-    const handleArticlePost = (articleData:ArticleData) =>{
-        // setArticles(articles.concat({articleData}))
-    }
+function FeedPage(){
     return(
-        <>
-        <ArticleCreator imageUrl="url" handlePost={handleArticlePost}/>
-        <ArticleCard userName='user' imgUrl='url' createdAt={new Date} content="lorem Ipsum" category="blee" subCategory="bla" />
-        </>
+        <div className="feed-page-container">
+        <ArticleCreator imgUrl="url"/>
+        {articleStore.articles.map((article,index) => {
+            return <ArticleCard 
+                        key={index}
+                        userName={article.author.userName} 
+                        imgUrl={article.author.imgUrl}
+                        createdAt={article.createdAt}
+                        content={article.content}
+                        category={article.category}
+                        subCategory={article.subCategory}/>})}
+        </div>
     )
 } 
+
+export default observer(FeedPage)

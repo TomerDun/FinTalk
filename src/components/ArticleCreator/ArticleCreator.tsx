@@ -1,34 +1,43 @@
 import { useState } from "react"
 import {IconCirclePlus, IconFolder, IconTag} from "@tabler/icons-react"
 import "./ArticleCreator.css"
+import { articleStore } from "../../stores/ArticleStore"
+import { observer } from "mobx-react-lite"
 
 export type ArticleData = {
-    articleInput:string,
-    selectedCategory:string,
-    selectedSubCategory:string
+    content:string,
+    category:string,
+    subCategory:string
+    createdAt:Date
 }
 
 type ArticalCreatorProps ={
-    imageUrl:string
-    handlePost:(articleData:ArticleData)=>void
+    imgUrl:string
 }
 
 
-export default function ArticleCreator({imageUrl,handlePost}:ArticalCreatorProps){
-    const [articleInput, setArticleInput] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedSubCategory, setSelectedSubCategory] = useState("");
+function ArticleCreator({imgUrl}:ArticalCreatorProps){
+    const [content, setContent] = useState("");
+    const [category, setCategory] = useState("");
+    const [subCategory, setSubCategory] = useState("");
     const categories = [
-        {category: "Entertainment", subCategories:["Movies","Games","Theatre"]},
-        {category:"Food", subCategories:["Groceries", "Dining Out", "Meal Prep"]},
-        {category:"Transportation", subCategories:["Gas", "Maintenance","Public Transit"]}
+        {cat: "Entertainment", subCats:["Movies","Games","Theatre"]},
+        {cat:"Food", subCats:["Groceries", "Dining Out", "Meal Prep"]},
+        {cat:"Transportation", subCats:["Gas", "Maintenance","Public Transit"]}
     ]
+
+    const handleArticlePost = (article:ArticleData) => {
+        setContent("");
+        setCategory("");
+        setSubCategory("");
+        articleStore.addArticle(article)
+    }
 
     return(
         <div className="creator-container">
             <div className="top-section">
                 <div className="profile-image-container">
-                    <img src={imageUrl} alt="" />
+                    <img src={imgUrl} alt="" />
                 </div>
                 <div className="creator-header">Share your financial insights</div>
             </div>
@@ -38,8 +47,8 @@ export default function ArticleCreator({imageUrl,handlePost}:ArticalCreatorProps
                         name="article-input" 
                         id="article-input" 
                         placeholder="What's on your mind?"
-                        value={articleInput}
-                        onChange={(e) => setArticleInput(e.target.value)}
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
                         >
                     </textarea>
                 </div>
@@ -53,16 +62,16 @@ export default function ArticleCreator({imageUrl,handlePost}:ArticalCreatorProps
                         <select 
                             name="category" 
                             id="category" 
-                            value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}>
-                                {selectedCategory === "" && (
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}>
+                                {category === "" && (
                                     <option value="" disabled>
                                         Select category
                                     </option>
                                 )}
                                 {categories.map((category,index) => (
-                                    <option key={index} value={category.category}>
-                                        {category.category}
+                                    <option key={index} value={category.cat}>
+                                        {category.cat}
                                     </option>
                                 ))}
                         </select>
@@ -70,18 +79,18 @@ export default function ArticleCreator({imageUrl,handlePost}:ArticalCreatorProps
                     <div className="selection-set">
                         <label 
                             htmlFor="sub-category" 
-                            className={selectedCategory === "" ? "disabled" : ""}>
+                            className={category === "" ? "disabled" : ""}>
                                 <IconTag size={16}/>
                                 <p>Sub-category</p>
                         </label>
                         <select 
-                            className={selectedCategory === "" ? "disabled" : ""}
+                            className={category === "" ? "disabled" : ""}
                             name="sub-category" 
                             id="sub-category"
-                            value={selectedSubCategory}
-                            onChange={(e) => setSelectedSubCategory(e.target.value)}>
+                            value={subCategory}
+                            onChange={(e) => setSubCategory(e.target.value)}>
                                 <option value="">None</option>
-                                {categories.find((category) => category.category === selectedCategory)?.subCategories
+                                {categories.find((c) => c.cat === category)?.subCats
                                 .map((sub,ind) => (
                                     <option key={ind} value={sub}>
                                         {sub}
@@ -94,7 +103,7 @@ export default function ArticleCreator({imageUrl,handlePost}:ArticalCreatorProps
             <div className="bottom-section">
                 <button 
                     className="post-article-button"
-                    onClick={() => handlePost({articleInput,selectedCategory,selectedSubCategory})}>
+                    onClick={() => handleArticlePost({content,category,subCategory,createdAt:new Date})}>
                     <IconCirclePlus size={16} />
                     <p>Post</p>
                 </button>
@@ -110,3 +119,5 @@ export default function ArticleCreator({imageUrl,handlePost}:ArticalCreatorProps
         value={tagInput}
         onChange={(e) => setTagInput(e.target.value)}  />
 </div> */}
+
+export default observer(ArticleCreator)

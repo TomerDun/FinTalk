@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
+import type { ArticleData } from "../components/ArticleCreator/ArticleCreator";
 
 export type articleAuther = {
     userName:string
@@ -40,8 +41,8 @@ class ArticleStore {
         })
     }
 
-    addArticle(article:Article){
-        this.articles.push(article)
+    addArticle(article:ArticleData){
+        this.articles.push({...article, author:{userName:"user", imgUrl:"url"}, profileId:1})
     }
 }
 
