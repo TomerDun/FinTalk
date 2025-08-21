@@ -1,4 +1,5 @@
 import type { Expense } from "../../../stores/ProfileStore"
+import './ExpenseCard.css'
 
 
 type ExpenseCardProps = {
