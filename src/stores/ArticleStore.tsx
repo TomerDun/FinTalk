@@ -20,6 +20,12 @@ class ArticleStore {
     articles:Article[] = [];
     userName = "";
     loading = false;
+    categories = [
+        {cat: "Entertainment", subCats:["Movies","Games","Theatre"]},
+        {cat:"Food", subCats:["Groceries", "Dining Out", "Meal Prep"]},
+        {cat:"Transportation", subCats:["Gas", "Maintenance","Public Transit"]}
+    ]
+    filterCategories: string[] = [];
 
     constructor(){
         makeAutoObservable(this);
@@ -44,6 +50,21 @@ class ArticleStore {
     addArticle(article:ArticleData){
         this.articles.push({...article, author:{userName:"user", imgUrl:"url"}, profileId:1})
     }
+
+    updateCategoryFilters = (filters: string[]) => {
+        this.filterCategories = filters;
+    }
+
+    get filteredArticles() {
+        if (this.filterCategories.length === 0) {
+            return this.articles;
+        }
+        return this.articles.filter(article => {
+            return this.filterCategories.includes(article.category) ||
+                (article.subCategory && this.filterCategories.includes(article.subCategory));
+        });
+    }
+
 }
 
 export const articleStore = new ArticleStore;
