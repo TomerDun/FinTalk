@@ -1,26 +1,27 @@
 import { IconHeart, IconBubbleText, IconShare } from "@tabler/icons-react"
 import "./ArticleCard.css";
 
-type ArticleCardProps = {
-    userName:string,
-    profilePicture:string,
-    createdAt:Date,
-    content:string,
-    tags:string[]
+interface ArticleCardProps {
+    userName:string
+    imgUrl:string
+    createdAt:Date
+    content:string
+    category:string
+    subCategory?:string
 }
 
-export default function ArticleCard({userName, profilePicture ,createdAt, content,tags}:ArticleCardProps){
+export default function ArticleCard({userName, imgUrl ,createdAt, content,category,subCategory}:ArticleCardProps){
 
-    const renderTags = () =>{
-        return tags.map(tag => <div className="tag">{"#" + tag}</div>)
-    }
+    // const renderTags = () =>{
+    //     return tags.map((tag,index) => <div key={index} className="tag">{"#" + tag}</div>)
+    // }
 
     return(
         <div className="article-container">
             <div className="top-section">
                 <div className="profile-image-container">
                     <p>U</p>
-                    <img src={profilePicture} alt="" />
+                    <img src={imgUrl} alt="" />
                 </div>
                 <div className="name-date-container">
                     <div className="user-name">{userName}</div>
@@ -32,7 +33,8 @@ export default function ArticleCard({userName, profilePicture ,createdAt, conten
                     <div className="content">{content}</div>
                 </div>
                 <div className="tag-container">
-                    {renderTags()}
+                    <div className="tag">{category}</div>
+                    {subCategory && <div className="tag">{subCategory}</div>}
                 </div>
             </div>
             <div className="bottom-section">
