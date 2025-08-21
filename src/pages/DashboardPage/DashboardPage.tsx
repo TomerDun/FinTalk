@@ -1,6 +1,9 @@
 import ExpensesList from "../../components/exponsesArea/ExpensesList/ExpensesList";
 
-export default function DashboardPage() {
+
+
+export default function DashboardPage() {    
+
     return (
 
         <div className="dashboard-page">
