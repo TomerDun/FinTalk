@@ -1,12 +1,12 @@
-import ArticleCard from "../components/ArticleCard/ArticleCard";
-import ArticleCreator from "../components/ArticleCreator/ArticleCreator";
+import ArticleCard from "../../components/ArticleCard/ArticleCard";
+import ArticleCreator from "../../components/ArticleCreator/ArticleCreator";
 import { useState } from "react";
-import {type ArticleData } from "../components/ArticleCreator/ArticleCreator";
+import {type ArticleData } from "../../components/ArticleCreator/ArticleCreator";
 
-export default function Feed(){
+export default function FeedPage(){
     const [articles, setArticles] = useState([]);
     const handleArticlePost = (articleData:ArticleData) =>{
-        setArticles(articles.concat({articleData}))
+        // setArticles(articles.concat({articleData}))
     }
     return(
         <>
