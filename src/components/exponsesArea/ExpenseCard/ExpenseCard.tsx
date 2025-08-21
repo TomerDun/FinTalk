@@ -12,7 +12,7 @@ export default function ExpenseCard({ expense }: ExpenseCardProps) {
         <div className="expense-container hover-shadow">
             <div className="header-row">
                 <span className="exp-name">Expense Name</span>
-                <span className="exp-amount">150$</span>
+                <span className="exp-amount">{expense.amount} $</span>
             </div>
 
             <div className="bottom-row">
