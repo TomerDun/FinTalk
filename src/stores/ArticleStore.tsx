@@ -1,5 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import type { ArticleData } from "../components/ArticleCreator/ArticleCreator";
+import type { ArticleInput } from "../components/ArticleCreator/ArticleCreator";
+import { fetchAllArticles } from "../utils/apiUtils/articleApiUtils";
+import { insertArticle } from "../utils/apiUtils/articleApiUtils";
 
 export type articleAuther = {
     userName:string
@@ -7,8 +9,9 @@ export type articleAuther = {
 }
 
 export type Article = {
-    author:articleAuther
-    profileId:number
+    author?:articleAuther
+    profileId?:number
+    id:number
     title?:string
     content:string
     createdAt:Date
@@ -31,24 +34,21 @@ class ArticleStore {
         makeAutoObservable(this);
     }
     
-    async fetchArticles(url:string){
+    async getArticles(){
         this.loading = true;
-        const response = await fetch(url);
-        if(!response.ok){
-            runInAction(() => {
-                this.loading = false;
-            })
-            throw Error("article response not ok");
-        }
-        const data = await response.json();
+        const response = await fetchAllArticles();
         runInAction(() => {
-            this.articles = data;
+            this.articles = response;
+            this.articles.sort((a,b) => b.id-a.id)
             this.loading = false;
         })
     }
 
-    addArticle(article:ArticleData){
-        this.articles.push({...article, author:{userName:"user", imgUrl:"url"}, profileId:1})
+    async postArticle(article:ArticleInput){
+        if(! await insertArticle(article)){
+            throw Error("article insert failed")
+        }
+        this.getArticles();
     }
 
     updateCategoryFilters = (filters: string[]) => {

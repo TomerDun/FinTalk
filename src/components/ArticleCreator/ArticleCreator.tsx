@@ -2,9 +2,11 @@ import { useState } from "react"
 import {IconCirclePlus, IconFolder, IconTag} from "@tabler/icons-react"
 import "./ArticleCreator.css"
 import { articleStore } from "../../stores/ArticleStore"
+import { profileStore } from "../../stores/ProfileStore"
 import { observer } from "mobx-react-lite"
 
-export type ArticleData = {
+export type ArticleInput = {
+    profileId:number,
     content:string,
     category:string,
     subCategory:string
@@ -26,11 +28,18 @@ function ArticleCreator({imgUrl}:ArticalCreatorProps){
         {cat:"Transportation", subCats:["Gas", "Maintenance","Public Transit"]}
     ]
 
-    const handleArticlePost = (article:ArticleData) => {
+    const handleArticlePost = () => {
         setContent("");
         setCategory("");
         setSubCategory("");
-        articleStore.addArticle(article)
+        if(profileStore.activeProfile){
+            articleStore.postArticle({
+                            content,
+                            category,
+                            subCategory,
+                            createdAt:new Date,
+                            profileId:profileStore.activeProfile.id})
+        }
     }
 
     return(
@@ -105,7 +114,7 @@ function ArticleCreator({imgUrl}:ArticalCreatorProps){
                 <button 
                     className="post-article-button"
                     disabled= {!content.length}
-                    onClick={() => handleArticlePost({content,category,subCategory,createdAt:new Date})}>
+                    onClick={() => handleArticlePost()}>
                     <IconCirclePlus size={16} />
                     <p>Post</p>
                 </button>

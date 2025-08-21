@@ -4,18 +4,24 @@ import ArticleFilter from "../../components/ArticleFilter/ArticleFilter";
 import { articleStore } from "../../stores/ArticleStore";
 import { observer } from "mobx-react-lite";
 import "./FeedPage.css"
+import { useEffect } from "react";
 
 function FeedPage(){
+
+    useEffect(()=>{
+        articleStore.getArticles();
+    },[])
+
     return(
         <div className="feed-page-container">
         <ArticleCreator imgUrl="url"/>
         <ArticleFilter/>
-        { 
-        articleStore.filteredArticles.map((article,index) => {
+        {
+        articleStore.filteredArticles.map((article) => {
             return <ArticleCard 
-                        key={index}
-                        userName={article.author.userName} 
-                        imgUrl={article.author.imgUrl}
+                        key={article.id}
+                        userName={article.author?.userName} 
+                        imgUrl={article.author?.imgUrl}
                         createdAt={article.createdAt}
                         content={article.content}
                         category={article.category}
