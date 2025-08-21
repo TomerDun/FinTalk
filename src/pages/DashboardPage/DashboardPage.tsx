@@ -1,15 +1,9 @@
-import { useEffect } from "react";
 import ExpensesList from "../../components/exponsesArea/ExpensesList/ExpensesList";
-import { observer } from "mobx-react-lite";
-import { fetchProfile } from "../../utils/apiUtils/profileApiUtils";
-import { fetchProfileExpenses } from "../../utils/apiUtils/expenseApiUtils";
 
-// TEMP - REMOVE THIS
-function DashboardPage() {    
-    useEffect(() => {
-        fetchProfile();
-        fetchProfileExpenses();
-    }, [])
+
+
+export default function DashboardPage() {    
+
     return (
 
         <div className="dashboard-page">
@@ -27,5 +21,3 @@ function DashboardPage() {
 
     )
 }
-
-export default observer(DashboardPage)
