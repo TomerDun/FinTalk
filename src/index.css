@@ -2,6 +2,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  --bg-main: rgb(246,248,250);
+
+  --bg-ui-hover: rgb(244, 244, 245)
+  
+  --text-header: rgb(15, 23, 42);
+  --text-info: rgb(71, 85, 105);
+
+  --text-negative: rgb(239, 68, 68);
+  --text-positive: rgb(5, 150, 105);
+  
+  --nav-hover: rgb(236 253 245);
+  --nav-text: rgb(4, 120, 87);
+  --nav-clicked: rgb(209, 250, 229);
+  --nav-clicked-border: rgb(167, 243, 208);
+
+  --color-positive-chart: rgb(16,185,129);
+  --gradient-main: linear-gradient(to right, rgb(16, 185, 129), rgb(13, 148, 136));
+
+  --border-color: rgb(229, 231, 235);
+
 }
 
 html,
@@ -9,4 +30,10 @@ body,
 #root {
   width: 100%;
   height: 100%;
+}
+
+/* Custom Utility Classes */
+
+.hover-shadow {
+  box-shadow: (0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;
 }
