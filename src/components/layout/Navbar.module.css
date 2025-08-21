@@ -25,20 +25,14 @@
 }
 
 .link:hover {
-  background-color: light-dark(
-    var(--mantine-color-gray-0),
-    var(--mantine-color-dark-6)
-  );
+  cursor: pointer;
+  background-color: var(--nav-hover);
 }
 
 .link[data-active] {
-  background-color: var(--mantine-color-blue-filled);
-  color: var(--mantine-color-white);
-}
-
-[data-mantine-color-scheme] .link[data-active] {
-  background-color: var(--mantine-color-blue-filled);
-  color: var(--mantine-color-white);
+  background-color: var(--nav-clicked);
+  color: var(--nav-text);
+  border: 1px solid var(--nav-clicked-border);
 }
 
 .itemContext {
