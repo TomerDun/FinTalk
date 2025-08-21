@@ -1,0 +1,26 @@
+import { supabase } from "./supabaseUtils";
+
+export async function fetchProfileExpenses(profileId=1) {
+    const {data, error} = await supabase.from('expenses').select('*').eq('profileId', profileId);
+
+    if(error) {
+        console.error('Supabase error when fetching profile expenses: ', error)
+        return error;
+    }
+
+    console.log('--fetched expenses for profile  ', profileId);   
+    console.log(data);
+    
+    return data;
+}
+
+// TEMP - Change any type to ExpenseInsert type
+export async function insertExpense(newExpense:any) {
+    const {error} = await supabase.from('expenses').insert(newExpense);
+    if (error) {
+        console.error('Error adding expense, ', error);
+        return error;        
+    }
+    console.log('--succesfully added expense');
+    return true;
+}
