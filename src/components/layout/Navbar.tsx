@@ -1,8 +1,7 @@
 import { Burger, Container, Group, Image, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconChartBar, IconHome, IconLogin2, IconPencilUp, IconUsers } from '@tabler/icons-react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { IconChartBar, IconHome, IconLogin2, IconLogout2, IconUsers } from '@tabler/icons-react';
+import { NavLink, useNavigate } from 'react-router';
 import finTalkLogo from '../../assets/fin-talk-logo.png';
 import classes from './Navbar.module.css';
 
@@ -14,37 +13,34 @@ type Item = {
 
 const links: Item[] = [
     { link: '/', label: 'Dashboard', icon: <IconHome size={20} /> },
-    // { link: '/dashboard', label: 'Dashboard', icon: <IconHome size={20} /> },
     { link: '/feed', label: 'Feed', icon: <IconUsers size={20} /> },
-    // { link: '/', label: 'Feed', icon: <IconUsers size={20} /> },
     { link: '/statistics', label: 'Statistics', icon: <IconChartBar size={20} /> },
     { link: '/login', label: 'Login', icon: <IconLogin2 size={20} /> },
-    { link: '/register', label: 'Register', icon: <IconPencilUp size={20} /> },
+    // { link: '/login', label: 'Logout', icon: <IconLogout2 size={20} /> },
 ];
 
 export function Navbar() {
 
     const [opened, { toggle }] = useDisclosure(false);
-    const [active, setActive] = useState(links[0].link);
     const navigate = useNavigate()
 
     const items = links.map((link) => (
-        <a
+        <NavLink
             key={link.label}
-            // href={link.link}
-            className={classes.link}
-            data-active={active === link.link || undefined}
-            onClick={(event) => {
-                event.preventDefault();
-                setActive(link.link);
-                navigate(link.link);
+            to={link.link}
+            className={({ isActive }) => 
+                `${classes.link} ${isActive ? classes.linkActive : ''}`
+            }
+            onClick={() => {
+                // Close mobile menu if open
+                if (opened) toggle();
             }}
         >
             <span className={classes.itemContext}>
                 {link.icon}
                 {link.label}
             </span>
-        </a>
+        </NavLink>
     ));
 
     return (
@@ -79,7 +75,6 @@ export function Navbar() {
                                 key={link.label}
                                 leftSection={link.icon}
                                 onClick={() => {
-                                    setActive(link.link);
                                     toggle();
                                     navigate(link.link)
                                 }}

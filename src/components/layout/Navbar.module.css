@@ -26,17 +26,16 @@
 
 .link:hover {
   cursor: pointer;
-  background-color: var(--nav-hover);
-}
-
-.link[data-active] {
-  background-color: var(--nav-clicked);
-  color: var(--nav-text);
-  border: 1px solid var(--nav-clicked-border);
 }
 
 .itemContext {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.linkActive {
+  background-color: var(--nav-hover);
+  color: var(--nav-text);
+  border: 1px solid var(--nav-clicked-border);
 }
