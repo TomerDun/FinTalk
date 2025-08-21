@@ -88,3 +88,8 @@ label:disabled{
     background-image: var(--gradient-main);
     cursor: pointer;
 }
+
+.post-article-button:disabled{
+    opacity: 0.7;
+    cursor: default;
+}

@@ -104,6 +104,7 @@ function ArticleCreator({imgUrl}:ArticalCreatorProps){
             <div className="bottom-section">
                 <button 
                     className="post-article-button"
+                    disabled= {!content.length}
                     onClick={() => handleArticlePost({content,category,subCategory,createdAt:new Date})}>
                     <IconCirclePlus size={16} />
                     <p>Post</p>
@@ -112,13 +113,5 @@ function ArticleCreator({imgUrl}:ArticalCreatorProps){
         </div>
     )
 }
-{/* <div className="tag-input-container">
-    <p>#</p>
-    <input 
-        type="text"
-        placeholder="Add tags (comma seperated)"
-        value={tagInput}
-        onChange={(e) => setTagInput(e.target.value)}  />
-</div> */}
 
 export default observer(ArticleCreator)
