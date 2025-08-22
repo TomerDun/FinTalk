@@ -1,3 +1,4 @@
+import type { ExpenseInput } from "../../stores/ProfileStore";
 import { supabase } from "./supabaseUtils";
 
 export async function fetchProfileExpenses(profileId=1) {
@@ -16,7 +17,7 @@ export async function fetchProfileExpenses(profileId=1) {
 }
 
 // TEMP - Change any type to ExpenseInsert type
-export async function insertExpense(newExpense:any) {
+export async function insertExpense(newExpense:ExpenseInput) {
     const {error} = await supabase.from('expenses').insert(newExpense);
     if (error) {
         console.error('Error adding expense, ', error);
