@@ -3,14 +3,16 @@ import { Select } from "@mantine/core";
 import { IconFolder, IconTag } from "@tabler/icons-react";
 import "./ExpenseCreator.css"
 import { fetchProfileExpenses, insertExpense } from "../../../utils/apiUtils/expenseApiUtils";
+import { observer } from "mobx-react-lite";
+import { profileStore } from "../../../stores/ProfileStore";
 
-export default function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (open: boolean) => void }) {
+function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (open: boolean) => void }) {
 
-    const [amount, setAmount] = useState("");
+    const [amount, setAmount] = useState<number|undefined>(undefined);
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [category, setCategory] = useState<string|null>("");
-    const [subCategory, setSubCategory] = useState<string|null>("");
+    const [subCategory, setSubCategory] = useState<string|undefined|null>("");
 
     const categories = [
         {cat: "Entertainment", subCats:["Movies","Games","Theatre"]},
@@ -19,12 +21,15 @@ export default function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (op
     ]
 
     const handleAddExpense = async () => {
-        setAmount("");
-        setTitle("");
-        setDate("");
-        setCategory("");
-        setSubCategory("");
-        await insertExpense({amount,title,date,category,subCategory,profileId:1});
+        if(profileStore.activeProfile){
+            setAmount(undefined);
+            setTitle("");
+            setDate("");
+            setCategory("");
+            setSubCategory("");
+            const newExpense = {amount,title,date:new Date(date),category,subCategory:subCategory && subCategory,profileId:profileStore.activeProfile.id}
+            profileStore.addExpense(newExpense);
+        }
     }
 
     const mainCategories = categories.map(category => category.cat);
@@ -36,8 +41,8 @@ export default function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (op
                 <input 
                     type="number"
                     name="amount"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
+                    value={amount !== null ? amount : ""}
+                    onChange={(e) => setAmount(Number(e.target.value))}
                     placeholder="0.00" />
             </div>
             <div className="title-date-section">
@@ -102,3 +107,5 @@ export default function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (op
         </div>
     )
 }
+
+export default observer(ExpenseCreator);
