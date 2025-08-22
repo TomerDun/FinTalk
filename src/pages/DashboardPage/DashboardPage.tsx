@@ -28,10 +28,9 @@ function DashboardPage() {
             </div>
 
             <div className="expense-counters-container">
-                <ExpenseCounterCard title="Total Spent" amount={profileStore.expenseSum} />
-                <ExpenseCounterCard title="Total Spent" amount={1500} changeAmount={15} changeText="from last month" />
-                <ExpenseCounterCard title="Total Spent" amount={1500} changeAmount={-15} changeText="from last month" />
-                <ExpenseCounterCard title="Total Spent" amount={1500} changeAmount={0} changeText="from last month" />
+                <ExpenseCounterCard title="Total Spent" currency="$" theme="coins" amount={profileStore.expenseSum} changeAmount={-15} changeText="from last month" />                
+                <ExpenseCounterCard title="Avg Expense" currency="$" theme="dollar" amount={profileStore.expenseAvg} changeAmount={15} changeText="from last month" />
+                <ExpenseCounterCard title="Total Transactions" theme="credit" amount={profileStore.expenses.length} changeAmount={0} changeText="from last month"/>
             </div>
 
             <div className="expenses-list container">

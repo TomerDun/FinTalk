@@ -21,7 +21,12 @@
   --nav-clicked-border: rgb(167, 243, 208);
 
   --color-positive-chart: rgb(16,185,129);
+
+  /* Gradients */
   --gradient-main: linear-gradient(to right, rgb(16, 185, 129), rgb(13, 148, 136));
+  --gradient-hot: linear-gradient(to right, rgb(249, 115, 22), rgb(220, 38, 38));
+  --gradient-cold: linear-gradient(to right, rgb(59, 130, 246), rgb(79, 70, 229));
+  --gradient-smooth: linear-gradient(to right, rgb(168, 85, 247), rgb(219, 39, 119));
 
   --border-color: rgb(229, 231, 235);
 

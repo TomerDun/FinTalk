@@ -46,8 +46,7 @@
 .expense-counter .symbol {
     width: 2.5rem;
     height: 2.5rem;
-    margin-left: auto;
-    background-image: var(--gradient-main);
+    margin-left: auto;    
     border-radius: 4px;
     color: white;
     display: flex;
@@ -63,3 +62,20 @@
 .negative-text {
     color: var(--text-negative);
 }
+
+.symbol-coins {
+    background-image: var(--gradient-main);
+}
+
+.symbol-credit {
+    background-image: var(--gradient-smooth);
+}
+
+.symbol-dollar {
+    background-image: var(--gradient-cold);
+}
+
+.symbol-bag {
+    background-image: var(--gradient-hot);
+}
+
