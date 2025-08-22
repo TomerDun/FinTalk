@@ -23,7 +23,7 @@ export type Expense = {
 
 class ProfileStore {
     activeProfile:Profile | null = null
-    expenses: Expense[] | null = [];
+    expenses: Expense[] = [];
     
     async getActiveProfile() {
         const newProfile = await fetchProfile();
@@ -46,6 +46,10 @@ class ProfileStore {
             console.log('--fetched expenses: ', newExpenses);
             
         })
+    }
+
+    get expenseSum() {
+        return this.expenses?.reduce((sum, curr) => sum += curr.amount, 0);
     }
 
     constructor() {

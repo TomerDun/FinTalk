@@ -6,9 +6,9 @@ import './ExpenseCounterCard.css'
 type ExpenseCounterCardProps = {
     title: string,
     amount: number,
-    changeAmount: number,
-    isPositive: boolean,
-    changeText: string,
+    changeAmount?: number,
+    isPositive?: boolean,
+    changeText?: string,
 }
 
 export default function ExpenseCounterCard({ title, amount, changeAmount, isPositive, changeText }: ExpenseCounterCardProps) {
@@ -17,14 +17,16 @@ export default function ExpenseCounterCard({ title, amount, changeAmount, isPosi
             <div className="content-col">
                 <span className="title">{title}</span>
                 <span className="amount">{amount}$</span>
-                <div className={`change ${isPositive ? 'positive-text' : 'negative-text'}`}>
-                    {isPositive ?
-                        <IconTrendingUp size={16} />
-                        :
-                        <IconTrendingDown size={16} />
-                    }
-                    <span>{changeAmount}% {changeText}</span>
-                </div>
+                {changeAmount !== undefined &&
+                    <div className={`change ${isPositive ? 'positive-text' : 'negative-text'}`}>
+                        {isPositive ?
+                            <IconTrendingUp size={16} />
+                            :
+                            <IconTrendingDown size={16} />
+                        }
+                        <span>{changeAmount}% {changeText}</span>
+                    </div>
+                }
 
             </div>
 

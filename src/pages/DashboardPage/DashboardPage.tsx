@@ -28,7 +28,7 @@ function DashboardPage() {
             </div>
 
             <div className="expense-counters-container">
-                <ExpenseCounterCard title="Total Spent" amount={1500} changeAmount={15} changeText="from last month" isPositive/>
+                <ExpenseCounterCard title="Total Spent" amount={profileStore.expenseSum} />
                 <ExpenseCounterCard title="Total Spent" amount={1500} changeAmount={15} changeText="from last month" isPositive={false}/>
                 <ExpenseCounterCard title="Total Spent" amount={1500} changeAmount={15} changeText="from last month" isPositive/>
                 <ExpenseCounterCard title="Total Spent" amount={1500} changeAmount={15} changeText="from last month" isPositive/>

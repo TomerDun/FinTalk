@@ -3,9 +3,10 @@ import { supabase } from "./supabaseUtils";
 export async function fetchProfileExpenses(profileId=1) {
     const {data, error} = await supabase.from('expenses').select('*').eq('profileId', profileId);
 
+    // TODO: check what you should return in case of an erorr (what is the correct typescript way)
     if(error) {
         console.error('Supabase error when fetching profile expenses: ', error)
-        return null;
+        return [];
     }
 
     console.log('--fetched expenses for profile  ', profileId);   
