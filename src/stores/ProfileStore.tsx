@@ -24,6 +24,7 @@ export type Expense = {
 class ProfileStore {
     activeProfile:Profile | null = null
     expenses: Expense[] = [];
+    loggedInUser: boolean = false;
     
     async getActiveProfile() {
         const newProfile = await fetchProfile();
@@ -48,7 +49,13 @@ class ProfileStore {
         })
     }
 
-    get expenseSum() {
+        // !!!!!!!! dont remove - used for now in auth
+    setUserLoggedIn(){
+        this.loggedInUser = true;
+        // console.log('logged in');
+    }
+
+        get expenseSum() {
         return this.expenses?.reduce((sum, curr) => sum += curr.amount, 0);
     }
 
