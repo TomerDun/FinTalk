@@ -113,7 +113,7 @@ function ArticleCreator({imgUrl}:ArticalCreatorProps){
             <div className="bottom-section">
                 <button 
                     className="post-article-button"
-                    disabled= {!content.length}
+                    disabled= {!content.length || !category}
                     onClick={() => handleArticlePost()}>
                     <IconCirclePlus size={16} />
                     <p>Post</p>
