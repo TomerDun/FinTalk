@@ -41,7 +41,7 @@ export type Profile = {
 }
 
 export type Expense = {
-    id?: number,
+    id: number,
     title: string,
     createdAt: Date,
     profileId: number,
