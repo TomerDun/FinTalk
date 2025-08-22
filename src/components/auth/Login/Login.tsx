@@ -10,9 +10,10 @@ import {
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { fetchProfile } from '../../../utils/apiUtils/profileApiUtils';
+import { loginUser } from '../../../utils/apiUtils/profileApiUtils';
 import { validateEmail, validatePassword } from '../../../utils/formUtils';
 import classes from './Login.module.css';
+import { profileStore } from '../../../stores/ProfileStore';
 
 export function Login() {
     const [isLoading, setIsLoading] = useState(false);
@@ -35,8 +36,9 @@ export function Login() {
             setIsLoading(true);
             setTimeout(() => { }, 1000);
 
-            const profile = await fetchProfile();
-            if(!profile?.id) throw new Error('Wrong Credentials, please try again')
+            const user = await loginUser()
+            // const user = await loginUser(values.email,values.password)
+            profileStore.setUserLoggedIn()
             navigate('/');
         } catch (error: any) {
             form.setErrors({ form: error.message });

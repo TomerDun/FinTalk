@@ -1,11 +1,13 @@
 import { Burger, Container, Group, Image, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconChartBar, IconHome, IconLogin2, IconLogout2, IconUsers } from '@tabler/icons-react';
-import { NavLink, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import finTalkLogo from '../../assets/fin-talk-logo.png';
+import { profileStore } from '../../stores/ProfileStore';
+import { CustomNavLink } from './CustomNavLink';
 import classes from './Navbar.module.css';
 
-type Item = {
+export type Item = {
     link: string,
     label: string,
     icon: any
@@ -15,33 +17,15 @@ const links: Item[] = [
     { link: '/', label: 'Dashboard', icon: <IconHome size={20} /> },
     { link: '/feed', label: 'Feed', icon: <IconUsers size={20} /> },
     { link: '/statistics', label: 'Statistics', icon: <IconChartBar size={20} /> },
-    { link: '/login', label: 'Login', icon: <IconLogin2 size={20} /> },
-    // { link: '/login', label: 'Logout', icon: <IconLogout2 size={20} /> },
 ];
+
+const loginItem = { link: '/login', label: 'Login', icon: <IconLogin2 size={20} /> }
+const logoutItem = { link: '/login', label: 'Logout', icon: <IconLogout2 size={20} /> }
 
 export function Navbar() {
 
     const [opened, { toggle }] = useDisclosure(false);
     const navigate = useNavigate()
-
-    const items = links.map((link) => (
-        <NavLink
-            key={link.label}
-            to={link.link}
-            className={({ isActive }) => 
-                `${classes.link} ${isActive ? classes.linkActive : ''}`
-            }
-            onClick={() => {
-                // Close mobile menu if open
-                if (opened) toggle();
-            }}
-        >
-            <span className={classes.itemContext}>
-                {link.icon}
-                {link.label}
-            </span>
-        </NavLink>
-    ));
 
     return (
         <header className={classes.header}>
@@ -56,7 +40,18 @@ export function Navbar() {
                 />
                 {/* full size menu */}
                 <Group gap={5} visibleFrom="xs">
-                    {items}
+                    {links.map((link) => (
+                        <CustomNavLink
+                            key={link.label}
+                            item={link}
+                            opened={opened} toggle={toggle} />
+                    ))}
+                    {profileStore.loggedInUser
+                        ? <div onClick={() => profileStore.setUserLoggedOut()}>
+                            <CustomNavLink item={logoutItem} opened={opened} toggle={toggle} />
+                        </div>
+                        : <CustomNavLink item={loginItem} opened={opened} toggle={toggle} />
+                    }
                 </Group>
 
                 {/* burger menu */}
@@ -81,9 +76,32 @@ export function Navbar() {
                             >
                                 {link.label}
                             </Menu.Item>))}
+                        {profileStore.loggedInUser
+                                ?<Menu.Item
+                                    key={logoutItem.label}
+                                    leftSection={logoutItem.icon}
+                                    onClick={() => {
+                                        toggle();
+                                        profileStore.setUserLoggedOut()
+                                        navigate(logoutItem.link)
+                                    }}
+                                >
+                                    {logoutItem.label}
+                                </Menu.Item>
+                                :<Menu.Item
+                                    key={loginItem.label}
+                                    leftSection={loginItem.icon}
+                                    onClick={() => {
+                                        toggle();
+                                        navigate(loginItem.link)
+                                    }}
+                                >
+                                    {loginItem.label}
+                                </Menu.Item>
+                        }
                     </Menu.Dropdown>
                 </Menu>
-            </Container>
+            </Container >
         </header >
     );
 }

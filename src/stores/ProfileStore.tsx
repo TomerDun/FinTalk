@@ -24,7 +24,8 @@ export type Expense = {
 class ProfileStore {
     activeProfile:Profile | null = null
     expenses: Expense[] | null = [];
-    
+    loggedInUser: boolean = false;
+
     async getActiveProfile() {
         const newProfile = await fetchProfile();
         
@@ -46,6 +47,18 @@ class ProfileStore {
             console.log('--fetched expenses: ', newExpenses);
             
         })
+    }
+
+    // !!!!!!!! dont remove - used for now in auth
+    setUserLoggedIn(){
+        this.loggedInUser = true;
+        // console.log('logged in');
+    }
+    
+    // !!!!!!!! dont remove - used for now in auth
+    setUserLoggedOut(){
+        this.loggedInUser = false;
+        // console.log('logged out');
     }
 
     constructor() {
