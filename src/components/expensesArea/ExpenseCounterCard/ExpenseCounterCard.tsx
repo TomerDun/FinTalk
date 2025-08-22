@@ -3,6 +3,7 @@
 import { IconCoins, IconCreditCard, IconCurrencyDollar, IconEqual, IconMinus, IconMoneybag, IconTrendingDown, IconTrendingUp } from "@tabler/icons-react"
 import './ExpenseCounterCard.css'
 import type { JSX } from "react"
+import CountUp from "../../MiscArea/CountUp"
 
 type ExpenseCounterCardProps = {
     title: string,
@@ -26,7 +27,9 @@ export default function ExpenseCounterCard({ title, amount, changeAmount, change
         <div className="expense-counter">
             <div className="content-col">
                 <span className="title">{title}</span>
-                <span className="amount">{amount} {currency}</span>
+                {/* <span className="amount">{amount} {currency}</span> */}
+                <CountUp to={amount} className="amount"/>
+                <span className="amount"> {currency}</span>
                 {changeAmount !== undefined &&
                     <div className={`change ${changeAmount > 0 ? 'positive-text' : (changeAmount < 0 && 'negative-text')}`}>
                         {changeAmount > 0 ?
@@ -37,7 +40,13 @@ export default function ExpenseCounterCard({ title, amount, changeAmount, change
                                 :
                                 <IconMinus size={16} />
                         }
-                        <span>{changeAmount}% {changeText}</span>
+                        {/* <span>{changeAmount}% {changeText}</span> */}
+                        {
+                            <>
+                            <CountUp to={changeAmount} />
+                            <span>% {changeText}</span>
+                            </>
+                        }
                     </div>
                 }
 
