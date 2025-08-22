@@ -15,6 +15,7 @@ function ArticleFilter(){
                 <p>Filter by category:</p>
             </div>
             <MultiSelect
+                searchable
                 value={articleStore.filterCategories}
                 checkIconPosition="right"
                 data={categories}
