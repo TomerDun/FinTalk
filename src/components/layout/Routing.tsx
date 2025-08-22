@@ -5,14 +5,19 @@ import { Register } from "../auth/Register/Register";
 import { PageNotFound } from "../../pages/PageNotFound/PageNotFound";
 import DashboardPage from "../../pages/DashboardPage/DashboardPage";
 import FeedPage from "../../pages/FeedPage/FeedPage";
+import { ProtectedRoute } from "../auth/ProtectedRoute";
 
 export function Routing() {
     return (
         <Box flex={1}>
             <Routes>
                 {/* feed - will change to the home page address*/}
-                <Route path="/feed" element={<FeedPage />}/>
-                <Route path="/" element={<DashboardPage />} />
+                <Route path="/feed" element={<FeedPage />} />
+                <Route path="/" element={
+                    <ProtectedRoute>
+                        <DashboardPage />
+                    </ProtectedRoute>}>
+                </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 {/* 404 */}
