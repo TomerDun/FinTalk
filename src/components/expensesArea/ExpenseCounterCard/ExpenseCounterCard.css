@@ -1,0 +1,55 @@
+.expense-counter {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    display: flex;
+    border-radius: 4px;
+    padding: 10px;    
+    flex: 1;
+        
+}
+
+.expense-counter .content-col {
+    flex: 1;
+}
+
+.expense-counter .symbol-col {
+    width: fit-content;
+}
+
+.expense-counter .title {
+    font-weight: 500;
+    color: var(--text-info);
+    display: block;
+}
+
+.expense-counter .amount {
+    color: var(--text-header);
+    font-weight: 700;
+    font-size: x-large;
+}
+
+.change {
+    display: flex;
+    align-items: center;
+}
+
+.expense-counter .symbol {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: auto;
+    background-image: var(--gradient-main);
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: small;
+}
+
+.positive-text {
+    color: var(--text-positive);
+}
+
+.negative-text {
+    color: var(--text-negative);
+}

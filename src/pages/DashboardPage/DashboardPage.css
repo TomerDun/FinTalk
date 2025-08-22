@@ -1,0 +1,7 @@
+.expense-counters-container {
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    
+}
