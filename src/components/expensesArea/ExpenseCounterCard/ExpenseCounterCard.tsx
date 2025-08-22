@@ -3,7 +3,7 @@
 import { IconCoins, IconCreditCard, IconCurrencyDollar, IconEqual, IconMinus, IconMoneybag, IconTrendingDown, IconTrendingUp } from "@tabler/icons-react"
 import './ExpenseCounterCard.css'
 import type { JSX } from "react"
-import CountUp from "../../MiscArea/CountUp"
+import CountUp from "../../MiscArea/CountUp/CountUp"
 
 type ExpenseCounterCardProps = {
     title: string,

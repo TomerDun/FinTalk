@@ -9,7 +9,7 @@ type ExpenseCardProps = {
 
 export default function ExpenseCard({ expense }: ExpenseCardProps) {
     return (
-        <div className="expense-container hover-shadow">
+        <div className="expense-container">
             <div className="header-row">
                 <span className="exp-name">{expense.title}</span>
                 <span className="exp-amount">{expense.amount} $</span>
