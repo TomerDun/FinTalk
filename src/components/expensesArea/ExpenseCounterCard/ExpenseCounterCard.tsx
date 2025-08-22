@@ -1,6 +1,6 @@
 // TODO: Add prop for icon
 
-import { IconCoins, IconEqual, IconTrendingDown, IconTrendingUp } from "@tabler/icons-react"
+import { IconCoins, IconEqual, IconMinus, IconTrendingDown, IconTrendingUp } from "@tabler/icons-react"
 import './ExpenseCounterCard.css'
 
 type ExpenseCounterCardProps = {
@@ -25,7 +25,7 @@ export default function ExpenseCounterCard({ title, amount, changeAmount, change
                             changeAmount < 0 ?
                                 <IconTrendingDown size={16} />
                                 :
-                                <IconEqual size={16} />
+                                <IconMinus size={16} />
                         }
                         <span>{changeAmount}% {changeText}</span>
                     </div>

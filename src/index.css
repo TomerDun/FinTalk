@@ -25,6 +25,12 @@
 
   --border-color: rgb(229, 231, 235);
 
+  --shadow-hover: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+
+
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
 }
 
 /* html,
@@ -36,10 +42,4 @@ body,
 
 #root {
   background-color: var(--bg-main);
-}
-
-/* Custom Utility Classes */
-
-.hover-shadow {
-  box-shadow: (0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;
 }
