@@ -10,7 +10,7 @@ import {
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { loginUser } from '../../../utils/apiUtils/profileApiUtils';
+import { loginUser } from '../../../utils/apiUtils/authUtils';
 import { validateEmail, validatePassword } from '../../../utils/formUtils';
 import classes from './Login.module.css';
 import { profileStore } from '../../../stores/ProfileStore';

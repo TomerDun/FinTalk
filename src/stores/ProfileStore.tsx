@@ -22,7 +22,6 @@ export type Expense = {
 }
 
 export type ExpenseInput = {
-    id: number,    
     date?: Date,
     profileId: number,
     amount: number,
@@ -34,6 +33,10 @@ class ProfileStore {
     activeProfile: Profile | null = null
     expenses: Expense[] = [];
     loggedInUser: boolean = false;
+
+    constructor() {
+        makeAutoObservable(this)
+    }
 
     async getActiveProfile() {
         const newProfile = await fetchProfile();
@@ -73,13 +76,17 @@ class ProfileStore {
         // console.log('logged in');
     }
 
+    // -- Computed Values --
+
     get expenseSum() {
         return this.expenses?.reduce((sum, curr) => sum += curr.amount, 0);
     }
 
-    constructor() {
-        makeAutoObservable(this)
+    get expenseAvg() {
+        return this.expenseSum / this.expenses.length
     }
+
+    
 }
 
 export const profileStore = new ProfileStore()
