@@ -2,8 +2,8 @@ import { IconHeart, IconBubbleText, IconShare } from "@tabler/icons-react"
 import "./ArticleCard.css";
 
 interface ArticleCardProps {
-    userName:string
-    imgUrl:string
+    userName?:string
+    imgUrl?:string
     createdAt:Date
     content:string
     category:string
@@ -12,10 +12,7 @@ interface ArticleCardProps {
 
 export default function ArticleCard({userName, imgUrl ,createdAt, content,category,subCategory}:ArticleCardProps){
 
-    // const renderTags = () =>{
-    //     return tags.map((tag,index) => <div key={index} className="tag">{"#" + tag}</div>)
-    // }
-
+    const dateObj = new Date(createdAt);
     return(
         <div className="article-container">
             <div className="top-section">
@@ -25,7 +22,7 @@ export default function ArticleCard({userName, imgUrl ,createdAt, content,catego
                 </div>
                 <div className="name-date-container">
                     <div className="user-name">{userName}</div>
-                    <div className="date">{createdAt.toLocaleDateString()}</div>
+                    <div className="date">{dateObj.toLocaleDateString()}</div>
                 </div>
             </div>
             <div className="main-container">

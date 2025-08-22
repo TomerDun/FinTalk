@@ -4,10 +4,10 @@
     align-items: flex-start;
     margin: auto;
     width: 550px;
-    border: 1px solid rgb(231, 231, 231);
+    border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     padding: 1.5rem;
-    background-color: #FCFDFD;
+    background-color: var(--bg-card);
 }
 
 .top-section{
@@ -24,7 +24,7 @@
     border-radius: 50%;
     border-color: #D1FAE5;
     border:2px solid #D1FAE5;
-    background-color: #0FB182;
+    background-image: var(--gradient-main);
 }
 
 .profile-image-container > p{
@@ -42,7 +42,7 @@
 }
 
 .name-date-container > .date{
-    color:gray;
+    color:var(--text-info);
 }
 
 .main-container{
@@ -89,8 +89,17 @@
     align-items: center;
     gap:0.5rem;
     border:none;
+    border-radius: 5px;
     background-color: white;
-    color:rgb(105, 105, 105);
+    color:var(--text-info);
+    cursor: pointer;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
 }
+
+.article-button:hover{
+    background-color: var(--bg-ui-hover);
+}
+
 .article-button.share-button { margin-left: auto; }
 

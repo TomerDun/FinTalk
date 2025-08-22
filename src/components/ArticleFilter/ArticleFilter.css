@@ -1,0 +1,19 @@
+.filter-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    margin: auto;
+    width: 550px;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    background-color: var(--bg-card);
+    color: var(--text-info);
+}
+
+.icon-label{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}

@@ -4,7 +4,7 @@ import { makeAutoObservable, runInAction } from "mobx"
 import { fetchProfile } from "../utils/apiUtils/profileApiUtils";
 
 export type Profile = {
-    id?: number,
+    id: number,
     userId: number,
     userName: string,
     imgUrl?: string,    
