@@ -9,7 +9,8 @@
   --bg-ui-hover: rgb(244, 244, 245);
   
   --text-header: rgb(15, 23, 42);
-  --text-info: rgb(71, 85, 105);
+  --text-info-old: rgb(71, 85, 105);
+  --text-info: rgb(100, 116, 139);
 
   --text-negative: rgb(239, 68, 68);
   --text-positive: rgb(5, 150, 105);

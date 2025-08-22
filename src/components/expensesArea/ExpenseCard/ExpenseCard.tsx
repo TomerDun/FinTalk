@@ -1,5 +1,5 @@
 import type { Expense } from "../../../stores/ProfileStore"
-import { IconCalendarEvent, IconTag } from "@tabler/icons-react"
+import { IconCalendarEvent, IconFolder, IconTag } from "@tabler/icons-react"
 import './ExpenseCard.css'
 
 
@@ -22,13 +22,15 @@ export default function ExpenseCard({ expense }: ExpenseCardProps) {
                 </span>
                 <div className="categories">
                     <span className="category">
-                        <IconTag size={16} />
+                        <IconFolder size={16} />
                         {expense.category}
                     </span>
-                    <span>
-                        <IconTag size={16}/>
-                        {expense.subCategory}
-                    </span>
+                    {expense.subCategory &&
+                        <span>
+                            <IconTag size={16} />
+                            {expense.subCategory}
+                        </span>
+                    }
                 </div>
             </div>
         </div>
