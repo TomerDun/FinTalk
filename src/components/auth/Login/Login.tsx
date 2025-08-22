@@ -12,7 +12,6 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { fetchProfile } from '../../../utils/apiUtils/profileApiUtils';
 import { validateEmail, validatePassword } from '../../../utils/formUtils';
-import "./Login.css";
 import classes from './Login.module.css';
 
 export function Login() {
