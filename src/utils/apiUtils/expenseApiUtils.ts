@@ -5,7 +5,7 @@ export async function fetchProfileExpenses(profileId=1) {
 
     if(error) {
         console.error('Supabase error when fetching profile expenses: ', error)
-        return error;
+        return null;
     }
 
     console.log('--fetched expenses for profile  ', profileId);   

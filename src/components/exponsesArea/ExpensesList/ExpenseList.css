@@ -1,0 +1,13 @@
+.expenses-list-container {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1rem;    
+}
+
+.expenses-list-container > .header-container {
+    color: var(--text-header);
+    font-weight: 700;
+    font-size: large;
+    margin-bottom: 1rem;
+}
