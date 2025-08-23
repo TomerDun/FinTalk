@@ -9,12 +9,12 @@ import { useEffect } from "react";
 function FeedPage(){
 
     useEffect(()=>{
-        articleStore.getArticles();
+        articleStore.getArticlesWithAuthor();
     },[])
 
     return(
         <div className="feed-page-container">
-        <ArticleCreator imgUrl="url"/>
+        <ArticleCreator/>
         <ArticleFilter/>
         {
         articleStore.filteredArticles.map((article) => {

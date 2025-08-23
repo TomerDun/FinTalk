@@ -10,6 +10,12 @@
     background-color: var(--bg-card);
 }
 
+@media(max-width: 575px){
+    .creator-container{
+        width: 100%;
+    }
+}
+
 .creator-container > .top-section{
     display: flex;
     align-items: center;
@@ -41,6 +47,12 @@
     display: flex;
     width: 100%;
     gap: 1rem;
+}
+
+@media(max-width: 575px){
+    .category-section{
+        flex-direction: column;
+    }
 }
 
 .selection-set{
@@ -92,4 +104,11 @@ label:disabled{
 .post-article-button:disabled{
     opacity: 0.7;
     cursor: default;
+}
+
+@media(max-width: 575px){
+    .post-article-button{
+        width: 100%;
+        justify-content: center;
+    }
 }

@@ -17,8 +17,10 @@ export default function ArticleCard({userName, imgUrl ,createdAt, content,catego
         <div className="article-container">
             <div className="top-section">
                 <div className="profile-image-container">
-                    <p>U</p>
-                    <img src={imgUrl} alt="" />
+                    {imgUrl ? <img src={imgUrl} alt="" />:
+                    <p>{userName?.charAt(0).toLocaleUpperCase()}</p>
+                    }
+                    
                 </div>
                 <div className="name-date-container">
                     <div className="user-name">{userName}</div>

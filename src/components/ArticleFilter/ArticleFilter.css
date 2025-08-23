@@ -17,3 +17,9 @@
     align-items: center;
     gap: 0.5em;
 }
+
+@media(max-width: 575px){
+    .filter-container{
+        width: 100%;
+    }
+}
