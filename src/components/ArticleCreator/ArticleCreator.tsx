@@ -13,12 +13,8 @@ export type ArticleInput = {
     createdAt:Date
 }
 
-type ArticalCreatorProps ={
-    imgUrl:string
-}
 
-
-function ArticleCreator({imgUrl}:ArticalCreatorProps){
+function ArticleCreator(){
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("");
     const [subCategory, setSubCategory] = useState("");
@@ -46,8 +42,11 @@ function ArticleCreator({imgUrl}:ArticalCreatorProps){
         <div className="creator-container">
             <div className="top-section">
                 <div className="profile-image-container">
+                    {profileStore.activeProfile?.imgUrl ? 
+                    <img src={profileStore.activeProfile?.imgUrl} alt="" /> :
                     <p>U</p>
-                    <img src={imgUrl} alt="" />
+                    }
+                    
                 </div>
                 <div className="creator-header">Share your financial insights</div>
             </div>

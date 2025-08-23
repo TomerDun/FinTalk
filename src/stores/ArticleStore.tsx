@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import type { ArticleInput } from "../components/ArticleCreator/ArticleCreator";
-import { fetchAllArticles } from "../utils/apiUtils/articleApiUtils";
+import { fetchAllArticles, fetchArticlesWithAuther } from "../utils/apiUtils/articleApiUtils";
 import { insertArticle } from "../utils/apiUtils/articleApiUtils";
 
 export type articleAuther = {
@@ -10,6 +10,8 @@ export type articleAuther = {
 
 export type Article = {
     author?:articleAuther
+    // userName:string
+    // imgUrl:string
     profileId?:number
     id:number
     title?:string
@@ -37,6 +39,16 @@ class ArticleStore {
     async getArticles(){
         this.loading = true;
         const response = await fetchAllArticles();
+        runInAction(() => {
+            this.articles = response;
+            this.articles.sort((a,b) => b.id-a.id)
+            this.loading = false;
+        })
+    }
+
+        async getArticlesWithAuthor(){
+        this.loading = true;
+        const response = await fetchArticlesWithAuther();
         runInAction(() => {
             this.articles = response;
             this.articles.sort((a,b) => b.id-a.id)
