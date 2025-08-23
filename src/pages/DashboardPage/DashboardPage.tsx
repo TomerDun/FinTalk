@@ -5,8 +5,7 @@ import { profileStore } from "../../stores/ProfileStore";
 import ExpenseCreator from "../../components/expensesArea/ExpenseCreator/ExpenseCreator";
 import ExpenseCounterCard from "../../components/expensesArea/ExpenseCounterCard/ExpenseCounterCard";
 import './DashboardPage.css'
-import AnimatedList from "../../components/MiscArea/AnimatedList/AnimatedList";
-import ExpenseCard from "../../components/expensesArea/ExpenseCard/ExpenseCard";
+
 
 function DashboardPage() {
     const [creatorOpen, setCreatorOpen] = useState(false);
@@ -30,14 +29,13 @@ function DashboardPage() {
             </div>
 
             <div className="expense-counters-container">
-                <ExpenseCounterCard title="Total Spent" currency="$" theme="coins" amount={profileStore.expenseSum} changeAmount={-15} changeText="from last month" />                
+                <ExpenseCounterCard title="Total Spent" currency="$" theme="coins" amount={profileStore.expenseSum} changeAmount={-15} changeText="from last month" />
                 <ExpenseCounterCard title="Avg Expense" currency="$" theme="dollar" amount={profileStore.expenseAvg} changeAmount={15} changeText="from last month" />
-                <ExpenseCounterCard title="Total Transactions" theme="credit" amount={profileStore.expenses.length} changeAmount={0} changeText="from last month"/>
+                <ExpenseCounterCard title="Total Transactions" theme="credit" amount={profileStore.expenses.length} changeAmount={0} changeText="from last month" />
             </div>
 
-            {/* <div className="expenses-list container"> */}
-                <ExpensesList />                
-            {/* </div> */}
+            <ExpensesList />
+
         </div>
 
     )
