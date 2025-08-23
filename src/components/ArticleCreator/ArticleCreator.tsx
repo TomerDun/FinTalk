@@ -4,20 +4,21 @@ import "./ArticleCreator.css"
 import { articleStore } from "../../stores/ArticleStore"
 import { profileStore } from "../../stores/ProfileStore"
 import { observer } from "mobx-react-lite"
+import { Select } from "@mantine/core"
 
 export type ArticleInput = {
     profileId:number,
     content:string,
-    category:string,
-    subCategory:string
+    category:string|null,
+    subCategory:string|null,
     createdAt:Date
 }
 
 
 function ArticleCreator(){
     const [content, setContent] = useState("");
-    const [category, setCategory] = useState("");
-    const [subCategory, setSubCategory] = useState("");
+    const [category, setCategory] = useState<string|null>("");
+    const [subCategory, setSubCategory] = useState<string|null>("");
     const categories = [
         {cat: "Entertainment", subCats:["Movies","Games","Theatre"]},
         {cat:"Food", subCats:["Groceries", "Dining Out", "Meal Prep"]},
@@ -37,6 +38,8 @@ function ArticleCreator(){
                             profileId:profileStore.activeProfile.id})
         }
     }
+
+    const mainCategories = categories.map(category => category.cat);
 
     return(
         <div className="creator-container">
@@ -62,51 +65,37 @@ function ArticleCreator(){
                     </textarea>
                 </div>
                 <div className="category-section">
-                    <div className="selection-set">
-                        <label 
-                            htmlFor="category">
-                                <IconFolder size={16}/>
-                                <p>Category</p>
-                        </label>
-                        <select 
-                            name="category" 
-                            id="category" 
+                    {/* <div className="selection-set"> */}
+                        <Select
+                            classNames={{input:"mantine-select"}}
+                            w={"100%"}
+                            searchable
+                            label={
+                                <div className="category-label-container">
+                                    <IconFolder/>
+                                    <p>Category</p>
+                                </div>
+                                }
+                            data={mainCategories}
                             value={category}
-                            onChange={(e) => setCategory(e.target.value)}>
-                                {category === "" && (
-                                    <option value="" disabled>
-                                        Select category
-                                    </option>
-                                )}
-                                {categories.map((category,index) => (
-                                    <option key={index} value={category.cat}>
-                                        {category.cat}
-                                    </option>
-                                ))}
-                        </select>
-                    </div>
-                    <div className="selection-set">
-                        <label 
-                            htmlFor="sub-category" 
-                            className={category === "" ? "disabled" : ""}>
-                                <IconTag size={16}/>
-                                <p>Sub-category</p>
-                        </label>
-                        <select 
-                            className={category === "" ? "disabled" : ""}
-                            name="sub-category" 
-                            id="sub-category"
-                            value={subCategory}
-                            onChange={(e) => setSubCategory(e.target.value)}>
-                                <option value="">None</option>
-                                {categories.find((c) => c.cat === category)?.subCats
-                                .map((sub,ind) => (
-                                    <option key={ind} value={sub}>
-                                        {sub}
-                                    </option>
-                                ))}
-                        </select>
-                    </div>
+                            onChange={setCategory}
+                        />
+                    <Select
+                    classNames={{input:"mantine-select"}}
+                    searchable
+                    w={"100%"}
+                    label={
+                        <div className="category-label-container">
+                            <IconTag/>
+                            <p>Sub Category</p>
+                        </div>
+                        }
+                    data={
+                        categories.find((c) => c.cat === category)?.subCats 
+                        }
+                    value={subCategory}
+                    onChange={setSubCategory}
+                />
                 </div>
             </div>
             <div className="bottom-section">
