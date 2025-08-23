@@ -1,5 +1,5 @@
 import type { ExpenseInput } from "../../stores/ProfileStore";
-import { supabase } from "./supabaseUtils";
+import { formatDates, supabase } from "./supabaseUtils";
 
 export async function fetchProfileExpenses(profileId=1) {
     const {data, error} = await supabase.from('expenses').select('*').eq('profileId', profileId);
@@ -12,6 +12,8 @@ export async function fetchProfileExpenses(profileId=1) {
 
     console.log('--fetched expenses for profile  ', profileId);   
     console.log(data);
+
+    formatDates(data, 'date');
     
     return data;
 }

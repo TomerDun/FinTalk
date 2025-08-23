@@ -6,6 +6,7 @@ import ExpenseCreator from "../../components/expensesArea/ExpenseCreator/Expense
 import ExpenseCounterCard from "../../components/expensesArea/ExpenseCounterCard/ExpenseCounterCard";
 import './DashboardPage.css'
 import { IconCirclePlus } from "@tabler/icons-react";
+import ProfileTotalSpendingChart from "../../components/ChartsArea/ProfileTotalSpendingChart/ProfileTotalSpendingChart";
 
 
 function DashboardPage() {
@@ -41,6 +42,8 @@ function DashboardPage() {
             </div>
 
             <ExpensesList />
+            
+            <ProfileTotalSpendingChart />
 
         </div>
 

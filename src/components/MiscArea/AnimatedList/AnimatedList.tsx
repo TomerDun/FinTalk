@@ -147,10 +147,9 @@ const AnimatedList: React.FC<AnimatedListProps> = ({
                             }
                         }}
                     >
-                        <div
-                            className={`item ${selectedIndex === index ? "selected" : ""} ${itemClassName}`}
-                        >
-                            <p className="item-text">{item}</p>
+                        <div className={`item ${selectedIndex === index ? "selected" : ""} ${itemClassName}`} >
+                            {/* <p className="item-text">{item}</p> */}
+                            {item}
                         </div>
                     </AnimatedItem>
                 ))}

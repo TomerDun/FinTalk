@@ -1,0 +1,15 @@
+.expense-chart-container {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    width: 50%;
+    padding: 1rem;
+}
+
+.header-row {
+    margin-bottom: 1rem;
+}
+
+.chart-content {
+    width: 95%;
+    margin: auto;
+}
