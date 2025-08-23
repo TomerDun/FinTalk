@@ -36,8 +36,8 @@ export function Login() {
             setIsLoading(true);
             setTimeout(() => { }, 1000);
 
-            const user = await loginUser()
-            // const user = await loginUser(values.email,values.password)
+            // const user = await loginUser()
+            const user = await loginUser(values.email,values.password)
             profileStore.setUserLoggedIn()
             navigate('/');
         } catch (error: any) {

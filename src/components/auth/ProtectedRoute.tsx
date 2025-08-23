@@ -1,8 +1,12 @@
-import type { ReactNode } from "react"
-import { profileStore } from "../../stores/ProfileStore"
-import { Navigate, Route } from "react-router"
+import type { ReactNode } from "react";
+import { Navigate } from "react-router";
+import { profileStore } from "../../stores/ProfileStore";
 
-export function ProtectedRoute({ children }: ReactNode) {
+type ProtectedRouteProps = {
+    children: ReactNode
+}
+
+export function ProtectedRoute({ children }: ProtectedRouteProps) {
     if (!profileStore.loggedInUser)
         return <Navigate to="/login" replace />;
 
