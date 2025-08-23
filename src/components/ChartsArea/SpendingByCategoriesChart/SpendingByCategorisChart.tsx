@@ -1,4 +1,4 @@
-import { AreaChart, BarChart } from "@mantine/charts";
+import { AreaChart } from "@mantine/charts";
 import '../ExpenseChart.css'
 import type { Expense } from "../../../stores/ProfileStore";
 import { groupExpensesByDateAndCateogry } from "../../../utils/expenseDataUtils";
