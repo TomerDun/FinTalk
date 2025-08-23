@@ -28,7 +28,7 @@ export default function ExpenseCounterCard({ title, amount, changeAmount, change
             <div className="content-col">
                 <span className="title">{title}</span>
                 {/* <span className="amount">{amount} {currency}</span> */}
-                <CountUp to={amount} className="amount"/>
+                <CountUp to={Number(amount.toFixed(1))} className="amount"/>
                 <span className="amount"> {currency}</span>
                 {changeAmount !== undefined &&
                     <div className={`change ${changeAmount > 0 ? 'positive-text' : (changeAmount < 0 && 'negative-text')}`}>
