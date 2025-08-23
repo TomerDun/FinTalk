@@ -8,7 +8,7 @@ import { profileStore } from "../../../stores/ProfileStore";
 
 function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (open: boolean) => void }) {
 
-    const [amount, setAmount] = useState<number|undefined>(undefined);
+    const [amount, setAmount] = useState<number|undefined|null>(undefined);
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [category, setCategory] = useState<string|null>("");
@@ -22,7 +22,7 @@ function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (open: boolean) =>
 
     const handleAddExpense = async () => {
         if(profileStore.activeProfile){
-            setAmount(undefined);
+            setAmount(null);
             setTitle("");
             setDate("");
             setCategory("");

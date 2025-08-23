@@ -24,7 +24,7 @@ export type Expense = {
 export type ExpenseInput = {
     date?: Date,
     profileId: number,
-    amount: number|undefined,
+    amount: number|undefined|null,
     category: string | null, //maybe change to enum later?
     subCategory?: string | null, //maybe change to enum later?   
 }
