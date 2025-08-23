@@ -42,10 +42,18 @@ function DashboardPage() {
                 <ExpenseCounterCard title="Total Transactions" theme="credit" amount={profileStore.expenses.length} changeAmount={0} changeText="from last month" />
             </div>
 
-            <ExpensesList />
-            
-            <SpendingByDateChart expenses={profileStore.expenses}/>
-            <SpendingByCategoriesChart expenses={profileStore.expenses} />
+            <div className="expense-data-container">
+
+                <div className="charts-container">
+                    <SpendingByDateChart expenses={profileStore.expenses} />
+                    <SpendingByCategoriesChart expenses={profileStore.expenses} />
+                </div>
+
+                <ExpensesList />
+            </div>
+
+
+
 
         </div>
 

@@ -1,12 +1,21 @@
 .expense-chart-container {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
-    width: 50%;
+    width: 48%;
+    max-height: 400px;
     padding: 1rem;
+    border-radius: 4px;
+    box-shadow: var(--shadow-sm);
+    transition-duration: 300ms;
+
+}
+
+.expense-chart-container:hover {
+    box-shadow: var(--shadow-hover);
 }
 
 .header-row {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
 
 .chart-content {

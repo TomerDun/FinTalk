@@ -25,3 +25,17 @@
 .add-expense-button:hover {
     background-image: var(--gradient-main-hover);
 }
+
+.dashboard-page .expense-data-container {
+    display: flex;
+    width: 100%; 
+    gap: 2rem;   
+}
+
+.dashboard-page .charts-container {
+    display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
