@@ -3,5 +3,25 @@
     width: 100%;
     display: flex;
     gap: 1rem;
-    
+
+}
+
+.add-expense-button {
+    padding: 1.5rem;
+    background-image: var(--gradient-main);
+    border-radius: 4px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: large;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;    
+    cursor: pointer;
+}
+
+.add-expense-button:hover {
+    background-image: var(--gradient-main-hover);
 }
