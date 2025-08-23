@@ -10,6 +10,12 @@
     background-color: var(--bg-card);
 }
 
+@media(max-width: 575px){
+    .article-container{
+        width: 100%;
+    }
+}
+
 .top-section{
     display: flex;
     gap:1rem;
