@@ -8,7 +8,7 @@ import { profileStore } from "../../../stores/ProfileStore";
 
 function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (open: boolean) => void }) {
 
-    const [amount, setAmount] = useState<number|undefined|null>(undefined);
+    const [amount, setAmount] = useState<string>("");
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [category, setCategory] = useState<string|null>("");
@@ -22,12 +22,12 @@ function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (open: boolean) =>
 
     const handleAddExpense = async () => {
         if(profileStore.activeProfile){
-            setAmount(null);
+            setAmount("");
             setTitle("");
             setDate("");
             setCategory("");
             setSubCategory("");
-            const newExpense = {amount,title,date:new Date(date),category,subCategory:subCategory && subCategory,profileId:profileStore.activeProfile.id}
+            const newExpense = {amount: Number(amount), title,date:new Date(date),category,subCategory:subCategory && subCategory,profileId:profileStore.activeProfile.id}
             profileStore.addExpense(newExpense);
         }
     }
@@ -41,9 +41,9 @@ function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (open: boolean) =>
                 <input 
                     type="number"
                     name="amount"
-                    value={amount !== null ? amount : ""}
-                    onChange={(e) => setAmount(Number(e.target.value))}
-                    placeholder="0.00" />
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    placeholder="0" />
             </div>
             <div className="title-date-section">
                 <div className="title-field-set field-set">
