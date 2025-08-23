@@ -1,27 +1,20 @@
 import { AreaChart } from "@mantine/charts";
 import '../ExpenseChart.css'
-import { observer } from "mobx-react-lite";
-import { profileStore } from "../../../stores/ProfileStore";
+import type { Expense } from "../../../stores/ProfileStore";
 import { groupExpensesByDate, groupExpensesByDateAndCateogry } from "../../../utils/expenseDataUtils";
 
-function ProfileTotalSpendingChart() {
+export default function SpendingByDateChart({ expenses }: { expenses: Expense[] }) {
 
-    const chartData = profileStore.expenses ? groupExpensesByDate(profileStore.expenses) : null
-    console.log(chartData);
-    
+    const chartData = groupExpensesByDate(expenses);
 
     const chartSeries = [
-        { name: 'amount', color: '#000000' }
+        { name: 'amount', color: 'indigo.6' }
     ]
-
-    console.log('Chart DATA: ', chartData);
-
 
     return (
         <div className="expense-chart-container">
             <div className="header-row">
-                <h2>Total Spending Chart</h2>
-                <button onClick={() => console.log(groupExpensesByDateAndCateogry(profileStore.expenses))}>Data</button>
+                <h2>Total Spending Chart</h2>                
             </div>
 
             {chartData &&
@@ -39,5 +32,3 @@ function ProfileTotalSpendingChart() {
 
     )
 }
-
-export default observer(ProfileTotalSpendingChart)
