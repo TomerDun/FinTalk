@@ -23,6 +23,8 @@ export default function SpendingByCategoriesChart({ expenses }: { expenses: Expe
                         dataKey="date"
                         series={chartSeries}                        
                         curveType="linear"
+                        gridAxis="xy"
+                        type="default"                                                
                     />
                 </div>
             }
