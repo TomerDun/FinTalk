@@ -1,4 +1,4 @@
-import { AreaChart } from "@mantine/charts";
+import { AreaChart, BarChart } from "@mantine/charts";
 import '../ExpenseChart.css'
 import type { Expense } from "../../../stores/ProfileStore";
 import { groupExpensesByDate, groupExpensesByDateAndCateogry } from "../../../utils/expenseDataUtils";
@@ -8,7 +8,7 @@ export default function SpendingByDateChart({ expenses }: { expenses: Expense[] 
     const chartData = groupExpensesByDate(expenses);
 
     const chartSeries = [
-        { name: 'amount', color: 'indigo.6' }
+        { name: 'amount', color: 'rgb(16,185,129)' }
     ]
 
     return (
@@ -19,12 +19,11 @@ export default function SpendingByDateChart({ expenses }: { expenses: Expense[] 
 
             {chartData &&
                 <div className="chart-content">
-                    <AreaChart
+                    <BarChart
                         h={300}
                         data={chartData}
                         dataKey="date"
-                        series={chartSeries}
-                        curveType="linear"
+                        series={chartSeries}                        
                     />
                 </div>
             }
