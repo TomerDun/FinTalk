@@ -1,8 +1,7 @@
 import { useState } from "react"
-import { Select } from "@mantine/core";
+import { resolveClassNames, Select } from "@mantine/core";
 import { IconFolder, IconTag } from "@tabler/icons-react";
 import "./ExpenseCreator.css"
-import { fetchProfileExpenses, insertExpense } from "../../../utils/apiUtils/expenseApiUtils";
 import { observer } from "mobx-react-lite";
 import { profileStore } from "../../../stores/ProfileStore";
 
@@ -64,6 +63,7 @@ function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (open: boolean) =>
             </div>
             <div className="category-section">
                 <Select
+                    classNames={{input:"mantine-select"}}
                     w={"50%"}
                     searchable
                     label={
@@ -77,6 +77,7 @@ function ExpenseCreator({ setCreatorOpen }: { setCreatorOpen: (open: boolean) =>
                     onChange={setCategory}
                 />
                 <Select
+                    classNames={{input:"mantine-select"}}
                     searchable
                     w={"50%"}
                     label={
