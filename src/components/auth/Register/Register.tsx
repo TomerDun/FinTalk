@@ -1,34 +1,68 @@
-import { NumberInput, Select, TextInput } from "@mantine/core";
+import { Select, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { City, Gender, Profession, Status, validateRegisterFormByStep } from "../../../utils/formUtils";
+import { City, Gender, Profession, Education, RelationshipStatus, validateRegisterFormByStep } from "../../../utils/formUtils";
 import classes from "./Register.module.css";
 import Stepper, { Step } from './Stepper';
 import { useRegisterForm } from "../../../utils/hooks/useRegisterForm";
+import { createUser } from "../../../utils/apiUtils/authApiUtils";
+import { insertProfile, type ProfileToDB } from "../../../utils/apiUtils/profileApiUtils";
 
 export function Register() {
 
-    const [currentStep, setCurrentStep] = useState(1);
-
+    const [currentStep, setCurrentStep] = useState(1); // control displayed step
     const form = useRegisterForm();
     const navigate = useNavigate();
 
     function handleStepChange(step: number) {
+        setCurrentStep(step); // Keep state in sync
         return validateRegisterFormByStep(form, step);
+    }
+
+    async function handleComplete() {
+        try {
+            const { email, password, userName, gender, birthdate, city, profession, education, relationshipStatus } = form.getValues();
+            
+            // create new user in DB
+            const newUser = await createUser(email, password);
+            const newProfileData: ProfileToDB = {
+                userId: newUser?.id as string,
+                userName,
+                email,
+                birthdate,
+                gender,
+                city,
+                profession,
+                education,
+                relationshipStatus
+            }
+
+            // create profile in DB and update activeProfile in store
+            await insertProfile(newProfileData);
+
+            navigate('/');
+        } catch (error: any) {
+            console.error(error);
+            // reject back to step 2 on error
+            setCurrentStep(2);
+
+            // Set specific error based on error type
+            if (error.message.includes('User already registered')) {
+                form.setErrors({
+                    email: 'This email is already registered. Please use a different email.'
+                });
+            } else {
+                form.setErrors({ user: error.message });
+            }
+        }
     }
 
     return (
         <div className="Register">
             <Stepper
-                initialStep={1}
-                onStepChange={(step) => {
-                    setCurrentStep(step)
-                }}
-                onFinalStepCompleted={() => {
-                    setTimeout(() => {
-                        navigate('/')
-                    }, 1000)
-                }}
+                currentStep={currentStep} // controlled step
+                onStepChange={(step) => setCurrentStep(step)}
+                onFinalStepCompleted={() => handleComplete()}
                 backButtonText="Previous"
                 nextButtonText="Next"
                 nextButtonProps={{
@@ -59,15 +93,20 @@ export function Register() {
                         key={form.key('password')}
                         {...form.getInputProps('password')}
                     />
+                    {form.errors.user && (
+                        <Text c="red" size="sm" mt="sm">
+                            {form.errors.user}
+                        </Text>
+                    )}
                 </Step>
                 <Step>
                     <h2>Let us get to know you better...</h2>
                     <TextInput
                         withAsterisk
-                        label="nickname"
-                        placeholder="your anonymous nickname"
-                        key={form.key('nickname')}
-                        {...form.getInputProps('nickname')}
+                        label="userName"
+                        placeholder="your anonymous usermame"
+                        key={form.key('userName')}
+                        {...form.getInputProps('userName')}
                     />
                     <Select
                         withAsterisk
@@ -80,14 +119,13 @@ export function Register() {
                         key={form.key('gender')}
                         {...form.getInputProps('gender')}
                     />
-                    <NumberInput
+                    <TextInput
                         withAsterisk
-                        placeholder="age"
-                        min={13}
-                        max={120}
-                        label="Pick your age"
-                        key={form.key('age')}
-                        {...form.getInputProps('age')}
+                        type="date"
+                        label="Birth Date"
+                        placeholder="Select your birth date"
+                        key={form.key('birthdate')}
+                        {...form.getInputProps('birthdate')}
                     />
                     <Select
                         withAsterisk
@@ -121,15 +159,28 @@ export function Register() {
                     <Select
                         mt="md"
                         comboboxProps={{ withinPortal: true }}
-                        data={Object.values(Status)}
-                        placeholder="Pick your status"
-                        label="Your status"
+                        data={Object.values(Education)}
+                        placeholder="Pick your education level"
+                        label="Education Level"
                         clearable
                         searchable
                         nothingFoundMessage="Nothing found..."
                         classNames={classes}
-                        key={form.key('status')}
-                        {...form.getInputProps('status')}
+                        key={form.key('education')}
+                        {...form.getInputProps('education')}
+                    />
+                    <Select
+                        mt="md"
+                        comboboxProps={{ withinPortal: true }}
+                        data={Object.values(RelationshipStatus)}
+                        placeholder="Pick your relationship status"
+                        label="Relationship Status"
+                        clearable
+                        searchable
+                        nothingFoundMessage="Nothing found..."
+                        classNames={classes}
+                        key={form.key('relationshipStatus')}
+                        {...form.getInputProps('relationshipStatus')}
                     />
                 </Step>
                 <Step>

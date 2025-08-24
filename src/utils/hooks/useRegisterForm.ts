@@ -1,5 +1,5 @@
 import { useForm } from "@mantine/form";
-import { City, Gender, Profession, Status } from "../formUtils";
+import { City, Gender, Profession, Education, RelationshipStatus } from "../formUtils";
 
 export function useRegisterForm() {
 
@@ -8,12 +8,13 @@ export function useRegisterForm() {
         initialValues: {
             email: '',
             password: '',
-            nickname: '',
-            age: 25,
+            userName: '',
+            birthdate: '',
             gender: '' as Gender,
             city: '' as City,
             profession: '' as Profession,
-            status: '' as Status,
+            education: '' as Education,
+            relationshipStatus: '' as RelationshipStatus,
         },
 
         validate: {
@@ -26,17 +27,31 @@ export function useRegisterForm() {
                 if (value.length < 6) return 'Password must be at least 6 characters long';
                 return null;
             },
-            nickname: (value) => {
-                if (!value) return 'Nickname is required';
-                if (value.length < 2) return 'Nickname must be at least 2 characters long';
-                if (value.length > 20) return 'Nickname must be less than 20 characters';
-                if (!/^[a-zA-Z0-9_]+$/.test(value)) return 'Nickname can only contain letters, numbers, and underscores';
+            userName: (value) => {
+                if (!value) return 'Username is required';
+                if (value.length < 2) return 'Username must be at least 2 characters long';
+                if (value.length > 20) return 'Username must be less than 20 characters';
+                if (!/^[a-zA-Z0-9_]+$/.test(value)) return 'Username can only contain letters, numbers, and underscores';
                 return null;
             },
-            age: (value) => {
-                if (!value) return 'Age is required';
-                if (value < 13) return 'You must be at least 13 years old';
-                if (value > 120) return 'Please enter a valid age';
+            birthdate: (value) => {
+                if (!value) return 'Birthdate is required';
+                
+                const birthDate = new Date(value);
+                if (isNaN(birthDate.getTime())) return 'Please enter a valid date';
+                
+                const today = new Date();
+                const age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                // Adjust age if birthday hasn't occurred this year
+                const actualAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate()) 
+                    ? age - 1 
+                    : age;
+                
+                if (actualAge < 13) return 'You must be at least 13 years old';
+                if (actualAge > 120) return 'Please enter a valid birthdate';
+                if (birthDate > today) return 'Birthdate cannot be in the future';
                 return null;
             },
             gender: (value) => {
@@ -52,13 +67,17 @@ export function useRegisterForm() {
             },
             profession: (value) => {
                 if (!value || value === undefined) return null;
-                // if (!value || value === undefined) return 'Profession is required';
                 if (!Object.values(Profession).includes(value as Profession)) return 'Please select a valid profession';
                 return null;
             },
-            status: (value) => {
+            education: (value) => {
                 if (!value || value === undefined) return null;
-                if (!Object.values(Status).includes(value as Status)) return 'Please select a valid status';
+                if (!Object.values(Education).includes(value as Education)) return 'Please select a valid education level';
+                return null;
+            },
+            relationshipStatus: (value) => {
+                if (!value || value === undefined) return null;
+                if (!Object.values(RelationshipStatus).includes(value as RelationshipStatus)) return 'Please select a valid relationship status';
                 return null;
             },
         },

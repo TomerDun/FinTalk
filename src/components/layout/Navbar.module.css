@@ -26,6 +26,7 @@
 
 .link:hover {
   cursor: pointer;
+  background-color: var(--nav-hover);
 }
 
 .itemContext {
@@ -35,7 +36,7 @@
 }
 
 .linkActive {
-  background-color: var(--nav-hover);
+  background-color: var(--nav-clicked);
   color: var(--nav-text);
   border: 1px solid var(--nav-clicked-border);
 }

@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router'
 
 
 function App() {
+    console.log('app - active profile');
+    console.log(profileStore.activeProfile);
 
     const navigate = useNavigate();
 
@@ -37,55 +39,6 @@ function App() {
 
         // setCheckedForUser(true);
     }
-
-    // useEffect(() => {
-    //     console.log('App useEffect - setting up auth listener');
-
-    //     async function checkSession() {
-    //         try {
-    //             // Check for existing session on app load
-    //             console.log('Checking for existing session...');
-    //             const { data, error } = await supabase.auth.getSession();
-    //             console.log(error);
-    //             if (error) {
-    //                 console.error('Error getting session:', error);
-    //             } else if (data.session?.user) {
-    //                 console.log('Found existing session:', data.session.user.id);
-    //                 await profileStore.getActiveProfile(data.session.user.id);
-    //             } else {
-    //                 console.log('No existing session found');
-    //             }
-    //         } catch (error) {
-    //             console.error('Error in auth initialization:', error);
-    //         }
-    //         finally {
-    //             console.log('Setting loading to false');
-    //             setIsLoading(false);
-    //         }
-    //     }
-
-    //     checkSession();
-
-    //     // Listen for future auth state changes (login/logout)
-    //     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-    //         async (event, session) => {
-    //             console.log('Auth state change:', event, 'Session:', !!session);
-
-    //             if (event === 'SIGNED_IN' && session?.user) {
-    //                 console.log('User signed in, loading profile...');
-    //                 await profileStore.getActiveProfile(session.user.id);
-    //             } else if (event === 'SIGNED_OUT') {
-    //                 console.log('User signed out, clearing profile...');
-    //                 profileStore.logoutProfile();
-    //             }
-    //         }
-    //     );
-
-    //     return () => subscription.unsubscribe();
-    // }, []);
-
-    // if (!profileStore.activeProfile) return <div>  loading</div>
-    // if (isLoading) return <div>  loading</div>
 
     return (
         <div className='App'>

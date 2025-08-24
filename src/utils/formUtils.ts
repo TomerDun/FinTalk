@@ -8,15 +8,16 @@ export function validateRegisterFormByStep(form: RegisterFormType, step: number)
             const pwdValid = form.validateField('password');
             return emailValid.hasError || pwdValid.hasError
         case 3:
-            const nicknameValid = form.validateField('nickname')
+            const usernameValid = form.validateField('userName')
             const genderValid = form.validateField('gender')
-            const ageValid = form.validateField('age')
+            const birthdateValid = form.validateField('birthdate')
             const cityValid = form.validateField('city');
-            return nicknameValid.hasError || genderValid.hasError || ageValid.hasError || cityValid.hasError;
+            return usernameValid.hasError || genderValid.hasError || birthdateValid.hasError || cityValid.hasError;
         case 4:
             const professionValid = form.validateField('profession')
-            const statusValid = form.validateField('status')
-            return professionValid.hasError || statusValid.hasError;
+            const educationValid = form.validateField('education')
+            const relationshipStatusValid = form.validateField('relationshipStatus')
+            return professionValid.hasError || educationValid.hasError || relationshipStatusValid.hasError;
         default:
             return false;
     }
@@ -29,12 +30,13 @@ export function validateAllRegisterForm(form: RegisterFormType) {
 export type RegisterFormType = UseFormReturnType<{
     email: string;
     password: string;
-    nickname: string;
-    age: number;
+    userName: string;
+    birthdate: string;
     gender: Gender;
     city: City;
     profession: Profession;
-    status: Status;
+    education: Education;
+    relationshipStatus: RelationshipStatus;
 }>;
 
 
@@ -69,7 +71,17 @@ export enum Profession {
     Chef = 'Chef'
 }
 
-export enum Status {
+export enum Education {
+    HighSchool = 'High School',
+    Bachelor = 'Bachelor\'s Degree',
+    Master = 'Master\'s Degree',
+    PhD = 'PhD',
+    Diploma = 'Diploma',
+    Certificate = 'Certificate',
+    Other = 'Other'
+}
+
+export enum RelationshipStatus {
     Single = 'Single',
     Married = 'Married',
     InRelationship = 'In a Relationship',
