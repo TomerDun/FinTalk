@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import type { Expense } from "../../stores/ProfileStore"
 import { fetchAllExpenses } from "../../utils/apiUtils/expenseApiUtils"
 import SpendingInCategoryChart from "../../components/ChartsArea/GeneralCharts/SpendingInCategoryChart/SpendingInCategoryChart"
+import CategorySplitChart from "../../components/ChartsArea/GeneralCharts/CategorySplitChart/CategorySplitChart"
 
 export default function StatsPage() {
 
@@ -33,7 +34,9 @@ export default function StatsPage() {
             </div>
 
             <div className="charts-area">
-                <SpendingInCategoryChart expenses={expenses} category="Food"/>
+                <SpendingInCategoryChart />
+
+                <CategorySplitChart expenses={expenses}/>
             </div>
         </div>
     )

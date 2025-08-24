@@ -2,7 +2,7 @@ import { AreaChart } from "@mantine/charts";
 import '../ExpenseChart.css'
 import type { Expense } from "../../../stores/ProfileStore";
 import { groupExpensesByDateAndCateogry } from "../../../utils/expenseDataUtils";
-import { generateSeries } from "../../../utils/hooks/chartFormatUtils";
+import { generateSeries } from "../../../utils/chartFormatUtils";
 
 export default function SpendingByCategoriesChart({ expenses }: { expenses: Expense[] }) {
 
