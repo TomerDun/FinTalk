@@ -1,8 +1,10 @@
 // Types
 
-import { makeAutoObservable, runInAction } from "mobx"
-import { fetchProfile } from "../utils/apiUtils/profileApiUtils";
+import { makeAutoObservable, runInAction } from "mobx";
 import { fetchProfileExpenses, insertExpense } from "../utils/apiUtils/expenseApiUtils";
+import { fetchProfile } from "../utils/apiUtils/profileApiUtils";
+import { loginUser, logoutUser } from "../utils/apiUtils/authUtils";
+import { supabase } from "../utils/apiUtils/supabaseUtils";
 
 export type Profile = {
     id: number,
@@ -32,23 +34,47 @@ export type ExpenseInput = {
 class ProfileStore {
     activeProfile: Profile | null = null
     expenses: Expense[] = [];
-    loggedInUser: boolean = false;
+    isLoggedIn = false;
+
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    async getActiveProfile() {
-        const newProfile = await fetchProfile();
+    async getActiveProfile(userId: string) {
+        console.log('profileStore - getActiveProfile, user ID: ', userId);
+
+        const newProfile = await fetchProfile(userId);
+        // const { data, error } = await supabase.auth.getSession();
+        // console.log(data);
 
 
         runInAction(() => {
             this.activeProfile = newProfile;
+            this.isLoggedIn = true;
+
         })
 
         console.log('--updated user profile--');
+    }
 
+    async loginProfile(email: string, password: string) {
+        try {
+            const user = await loginUser(email, password);
 
+            runInAction(() => {
+                this.isLoggedIn = true;
+            })
+            console.log('--user profile logged in--');
+        } catch (error) {
+            console.log('profileStore - login failed: ', error);
+        }
+    }
+
+    logoutProfile() {
+        this.isLoggedIn = false;
+        this.activeProfile = null;
+        console.log('--user profile loggedOut--');
     }
 
     async getExpenses() {
@@ -56,24 +82,17 @@ class ProfileStore {
 
         runInAction(() => {
             this.expenses = newExpenses;
-            console.log('--fetched expenses: ', newExpenses);
-
+            // console.log('--fetched expenses: ', newExpenses);
         })
     }
 
-    async addExpense(newExpense:ExpenseInput){
-        if(! await insertExpense(newExpense)){
+    async addExpense(newExpense: ExpenseInput) {
+        if (! await insertExpense(newExpense)) {
             throw Error("Error adding expense")
             console.error('Error adding expense');
         }
-        
-        this.getExpenses();
-    }
 
-    // !!!!!!!! dont remove - used for now in auth
-    setUserLoggedIn() {
-        this.loggedInUser = true;
-        // console.log('logged in');
+        this.getExpenses();
     }
 
     // -- Computed Values --
@@ -86,7 +105,7 @@ class ProfileStore {
         return this.expenseSum / this.expenses.length
     }
 
-    
+
 }
 
 export const profileStore = new ProfileStore()
