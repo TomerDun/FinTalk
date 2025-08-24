@@ -17,7 +17,12 @@ export default function CategorySplitChart({ expenses }: { expenses: Expense[] }
                 <div className="chart-content">
                     <PieChart
                         h={300}
-                        data={chartData}                                                                                                                     
+                        data={chartData}  
+                        withTooltip
+                        tooltipDataSource="segment"                                                                                                                   
+                        withLabels
+                        labelsPosition="outside"
+                        labelsType="percent"
                     />
                 </div>
             }
