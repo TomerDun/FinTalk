@@ -28,7 +28,7 @@ function ProfileViewContainer(){
             <ProfileEditView
                 userName={profileStore.activeProfile?.userName}
                 imgUrl={profileStore.activeProfile?.imgUrl}
-                email="example@gmail.com"
+                email={profileStore.activeProfile?.email}
                 age="28"
                 gender="Male"
                 education="B.Sc"

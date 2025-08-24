@@ -16,7 +16,7 @@ function FeedPage(){
 
     return(
         <div className="feed-page-container">
-        <ProfileView 
+        {/* <ProfileView 
             userName={profileStore.activeProfile?.userName}
             imgUrl={profileStore.activeProfile?.imgUrl}
             email="example@gmail.com"
@@ -26,7 +26,7 @@ function FeedPage(){
             city="jerusalem"
             profession="Developer"
             status="Single"
-            />
+            /> */}
         <ArticleCreator/>
         <ArticleFilter/>
         {

@@ -11,6 +11,7 @@ export type Profile = {
     userId: number,
     userName: string,
     imgUrl?: string,
+    email:string
 }
 
 export type Expense = {

@@ -6,7 +6,7 @@ import "./ProfileEditView.css"
 interface ProfileEditViewProps{
     imgUrl:string|undefined
     userName:string|undefined
-    email:string
+    email:string|undefined
     age:string
     gender:string|null
     education:string
