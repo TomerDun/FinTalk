@@ -25,3 +25,19 @@ export async function insertExpense(newExpense:ExpenseInput) {
     // console.log('--succesfully added expense');
     return true;
 }
+
+
+// Fetch all expenses
+export async function fetchAllExpenses() {
+    const {data, error} = await supabase.from('expenses').select('*');
+
+    // TODO: check what you should return in case of an erorr (what is the correct typescript way)
+    if(error) {
+        // console.error('Supabase error when fetching profile expenses: ', error)
+        return [];
+    }    
+
+    formatDates(data, 'date');
+    
+    return data;
+}
