@@ -7,6 +7,7 @@ import Stepper, { Step } from './Stepper';
 import { useRegisterForm } from "../../../utils/hooks/useRegisterForm";
 import { createUser } from "../../../utils/apiUtils/authApiUtils";
 import { insertProfile, type ProfileToDB } from "../../../utils/apiUtils/profileApiUtils";
+import { profileStore } from "../../../stores/ProfileStore";
 
 export function Register() {
 
@@ -38,7 +39,10 @@ export function Register() {
             }
 
             // create profile in DB and update activeProfile in store
-            await insertProfile(newProfileData);
+            await insertProfile(newProfileData);     
+            if (newUser) {
+                profileStore.getActiveProfile(newUser.id);
+            }
 
             navigate('/');
         } catch (error: any) {

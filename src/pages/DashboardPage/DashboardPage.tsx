@@ -25,7 +25,7 @@ function DashboardPage() {
 
             <div className="header-area">
                 <div className="greeting-container">
-                    <h1>Welcome Back, {profileStore.activeProfile ? profileStore.activeProfile.userName : '...'}</h1>
+                    <h1>👋 Welcome Back, {profileStore.activeProfile ? profileStore.activeProfile.userName : '...'}</h1>
                     <span>Here is you overview</span>
                 </div>
             </div>
