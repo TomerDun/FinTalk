@@ -14,17 +14,23 @@ export default function SpendingByDateChart({ expenses }: { expenses: Expense[] 
     return (
         <div className="expense-chart-container">
             <div className="header-row">
-                <h2>Total Spending Chart</h2>                
+                <h2>Total Spending Chart</h2>
             </div>
 
             {chartData &&
                 <div className="chart-content">
-                    <BarChart
-                        h={300}
-                        data={chartData}
-                        dataKey="date"
-                        series={chartSeries}                        
-                    />
+                    {chartData.length ?
+                        <BarChart
+                            h={300}
+                            data={chartData}
+                            dataKey="date"
+                            series={chartSeries}
+                        />
+                        :
+                        <div className="no-data-container">
+                            <h2 className="no-data-text">No Data..</h2>
+                        </div>
+                    }
                 </div>
             }
         </div>

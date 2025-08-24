@@ -6,7 +6,7 @@ import { generateSeries } from "../../../utils/chartFormatUtils";
 
 export default function SpendingByCategoriesChart({ expenses }: { expenses: Expense[] }) {
 
-    const chartData = groupExpensesByDateAndCateogry(expenses, true)    
+    const chartData = groupExpensesByDateAndCateogry(expenses, true)
     const chartSeries = generateSeries(chartData, ['date']);
 
     return (
@@ -15,19 +15,23 @@ export default function SpendingByCategoriesChart({ expenses }: { expenses: Expe
                 <h2>Spending By Category</h2>
             </div>
 
-            {chartData &&
-                <div className="chart-content">
+            <div className="chart-content">
+                {chartData.length ?
                     <AreaChart
                         h={300}
                         data={chartData}
                         dataKey="date"
-                        series={chartSeries}                        
+                        series={chartSeries}
                         curveType="linear"
                         gridAxis="xy"
-                        type="default"                                                
+                        type="default"
                     />
-                </div>
-            }
+                    :
+                    <div className="no-data-container">
+                        <h2 className="no-data-text">No Data..</h2>
+                    </div>
+                }
+            </div>
         </div>
 
     )

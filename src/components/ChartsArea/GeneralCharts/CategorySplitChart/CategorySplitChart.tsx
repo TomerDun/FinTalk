@@ -5,7 +5,7 @@ import { groupByCategoriesOnly } from "../../../../utils/expenseDataUtils";
 
 export default function CategorySplitChart({ expenses }: { expenses: Expense[] }) {
 
-    const chartData = groupByCategoriesOnly(expenses)        
+    const chartData = groupByCategoriesOnly(expenses)
 
     return (
         <div className="expense-chart-container">
@@ -13,22 +13,26 @@ export default function CategorySplitChart({ expenses }: { expenses: Expense[] }
                 <h2>Category Split</h2>
             </div>
 
-            {chartData &&
-                <div className="chart-content">
+            <div className="chart-content">
+                {chartData.length ?
                     <PieChart
                         h={300}
-                        data={chartData}  
+                        data={chartData}
                         withTooltip
-                        tooltipDataSource="segment"                                                                                                                   
+                        tooltipDataSource="segment"
                         withLabels
                         labelsPosition="outside"
-                        labelsType="percent"                                                
+                        labelsType="percent"
                         size={220}
                         // tooltipAnimationDuration={20}
-                        tooltipProps={{animationDuration: 500, isAnimationActive: true}}
+                        tooltipProps={{ animationDuration: 500, isAnimationActive: true }}
                     />
-                </div>
-            }
+                    :
+                    <div className="no-data-container">
+                        <h2 className="no-data-text">No Data..</h2>
+                    </div>
+                }
+            </div>
         </div>
 
     )
