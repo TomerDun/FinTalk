@@ -90,5 +90,6 @@
 }
 
 .field-set > .field-title{
+    font-weight: 500;
     color:var(--text-info)
 }

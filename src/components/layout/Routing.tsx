@@ -6,12 +6,14 @@ import DashboardPage from "../../pages/DashboardPage/DashboardPage";
 import FeedPage from "../../pages/FeedPage/FeedPage";
 import ProtectedRoute from "../auth/ProtectedRoute";
 import Login from "../auth/Login/Login";
+import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 
 export function Routing() {
     return (
         <Box flex={1}>
             <Routes>
                 {/* feed - will change to the home page address*/}
+                <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/feed" element={<FeedPage />} />
                 <Route path="/" element={
                     <ProtectedRoute>
