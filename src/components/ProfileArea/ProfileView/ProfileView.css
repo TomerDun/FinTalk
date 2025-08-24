@@ -48,11 +48,25 @@
     gap: 1rem;
 }
 
+.field-set-couple{
+    display: flex;
+    gap: 1rem;
+}
+
 .info-field-container{
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
     background-color: var(--bg-main);
 }
 
+.info-field-container > .field-icon-container{
+    color:var(--text-info)
+}
+
+.field-set > .field-title{
+    color:var(--text-info)
+}

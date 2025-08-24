@@ -1,4 +1,4 @@
-import { IconCalendar,IconMapPin,IconBriefcase,IconUsers,IconHeart, IconMail } from "@tabler/icons-react"
+import { IconCalendar,IconMapPin,IconBriefcase,IconUsers,IconHeart, IconMail,IconSchool } from "@tabler/icons-react"
 import "./ProfileView.css"
 
 interface ProfileViewProps{
@@ -7,12 +7,13 @@ interface ProfileViewProps{
     email:string
     age:string
     gender:string
+    education:string
     city:string
     profession:string
     status:string
 }
 
-function ProfileView({imgUrl,userName,email,age,gender,city,profession,status}:ProfileViewProps){
+function ProfileView({imgUrl,userName,email,age,gender,education,city,profession,status}:ProfileViewProps){
     return(
         <div className="profile-view-container">
             <div className="top-section">
@@ -28,39 +29,52 @@ function ProfileView({imgUrl,userName,email,age,gender,city,profession,status}:P
                 </div>
             </div>
                 <div className="info-section">
-                    <div className="info-field-container">
-                        <div className="field-icon-container"><IconCalendar size={16}/></div>
-                        <div className="field-set">
-                            <div className="field-title">Age</div>
-                            <div className="field-info">{age} years old</div>
+                    <div className="field-set-couple">
+                        <div className="info-field-container">
+                            <div className="field-icon-container"><IconCalendar size={16}/></div>
+                            <div className="field-set">
+                                <div className="field-title">Age</div>
+                                <div className="field-info">{age} years old</div>
+                            </div>
+                        </div>
+                        <div className="info-field-container">
+                            <div className="field-icon-container"><IconUsers size={16}/></div>
+                            <div className="field-set">
+                                <div className="field-title">Gender</div>
+                                <div className="field-info">{gender}</div>
+                            </div>
                         </div>
                     </div>
-                    <div className="info-field-container">
-                        <div className="field-icon-container"><IconUsers size={16}/></div>
-                        <div className="field-set">
-                            <div className="field-title">Gender</div>
-                            <div className="field-info">{gender}</div>
+                    <div className="field-set-couple">
+                        <div className="info-field-container">
+                            <div className="field-icon-container"><IconSchool size={16}/></div>
+                            <div className="field-set">
+                                <div className="field-title">Education</div>
+                                <div className="field-info">{education}</div>
+                            </div>
+                        </div>
+                        <div className="info-field-container">
+                            <div className="field-icon-container"><IconMapPin size={16}/></div>
+                            <div className="field-set">
+                                <div className="field-title">City</div>
+                                <div className="field-info">{city}</div>
+                            </div>
                         </div>
                     </div>
-                    <div className="info-field-container">
-                        <div className="field-icon-container"><IconMapPin size={16}/></div>
-                        <div className="field-set">
-                            <div className="field-title">City</div>
-                            <div className="field-info">{city}</div>
+                    <div className="field-set-couple">
+                        <div className="info-field-container">
+                            <div className="field-icon-container"><IconBriefcase size={16}/></div>
+                            <div className="field-set">
+                                <div className="field-title">Profession</div>
+                                <div className="field-info">{profession}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="info-field-container">
-                        <div className="field-icon-container"><IconBriefcase size={16}/></div>
-                        <div className="field-set">
-                            <div className="field-title">Profession</div>
-                            <div className="field-info">{profession}</div>
-                        </div>
-                    </div>
-                    <div className="info-field-container">
-                        <div className="field-icon-container"><IconHeart size={16}/></div>
-                        <div className="field-set">
-                            <div className="field-title">Status</div>
-                            <div className="field-info">{status}</div>
+                        <div className="info-field-container">
+                            <div className="field-icon-container"><IconHeart size={16}/></div>
+                            <div className="field-set">
+                                <div className="field-title">Status</div>
+                                <div className="field-info">{status}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

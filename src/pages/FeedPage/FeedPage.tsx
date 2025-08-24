@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite";
 import "./FeedPage.css"
 import { useEffect } from "react";
 import ProfileView from "../../components/ProfileArea/ProfileView/ProfileView";
+import { profileStore } from "../../stores/ProfileStore";
 
 function FeedPage(){
 
@@ -16,11 +17,12 @@ function FeedPage(){
     return(
         <div className="feed-page-container">
         <ProfileView 
-            userName={articleStore.articles[0].author?.userName}
-            imgUrl={articleStore.articles[0].author?.imgUrl}
+            userName={profileStore.activeProfile?.userName}
+            imgUrl={profileStore.activeProfile?.imgUrl}
             email="example@gmail.com"
             age="28"
             gender="Male"
+            education="B.Sc"
             city="jerusalem"
             profession="Developer"
             status="Single"
