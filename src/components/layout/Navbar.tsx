@@ -18,7 +18,7 @@ export type Item = {
 const links: Item[] = [
     { link: '/', label: 'Dashboard', icon: <IconHome size={20} /> },
     { link: '/feed', label: 'Feed', icon: <IconUsers size={20} /> },
-    { link: '/statistics', label: 'Statistics', icon: <IconChartBar size={20} /> },
+    { link: '/stats', label: 'Statistics', icon: <IconChartBar size={20} /> },    
 ];
 
 const loginItem = { link: '/login', label: 'Login', icon: <IconLogin2 size={20} /> }

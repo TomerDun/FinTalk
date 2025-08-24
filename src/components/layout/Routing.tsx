@@ -6,6 +6,7 @@ import DashboardPage from "../../pages/DashboardPage/DashboardPage";
 import FeedPage from "../../pages/FeedPage/FeedPage";
 import ProtectedRoute from "../auth/ProtectedRoute";
 import Login from "../auth/Login/Login";
+import StatsPage from "../../pages/StatsPage/StatsPage";
 
 export function Routing() {
     return (
@@ -18,6 +19,14 @@ export function Routing() {
                         <DashboardPage />
                     </ProtectedRoute>}>
                 </Route>
+
+                <Route path="/stats" element={
+                    <ProtectedRoute>
+                        <StatsPage />
+                    </ProtectedRoute>}>
+                </Route>
+
+
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 {/* 404 */}
