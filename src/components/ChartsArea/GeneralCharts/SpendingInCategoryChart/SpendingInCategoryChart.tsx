@@ -39,20 +39,13 @@ export default function SpendingInCategoryChart() {
     return (
         <div className="expense-chart-container">
             <div className="header-row">
-                <h2>Total Spending In {categoryFilter}</h2>
+                <h2>
+                    {categoryFilter ? `Total Spending In ${categoryFilter}`
+                    : `Spending In Category`
+                    }
+                    
+                    </h2>
             </div>
-
-            {chartData &&
-                <div className="chart-content">
-                    <AreaChart
-                        h={300}
-                        data={chartData}
-                        dataKey="date"
-                        series={chartSeries}
-                        curveType="linear"
-                    />
-                </div>
-            }
 
             <div className="filter-row">
                 <div className="icon-label">
@@ -61,14 +54,32 @@ export default function SpendingInCategoryChart() {
                 </div>
                 <Select
                     searchable
-                    value={categoryFilter}                    
+                    value={categoryFilter}
                     data={mockCategories}
                     placeholder="Category"
-                    w={"90%"}
+                    w={"70%"}
                     clearable
                     onChange={setCategoryFilter}
                 />
             </div>
+
+
+            <div className="chart-content">
+                {chartData && categoryFilter ?
+                    <AreaChart
+                        h={300}
+                        data={chartData}
+                        dataKey="date"
+                        series={chartSeries}
+                        curveType="linear"
+                    />
+                    :
+                    <div className="no-data-container">
+                        <h2 className="no-data-text">No Data..</h2>
+                    </div>
+                }
+            </div>
+
         </div>
 
     )
