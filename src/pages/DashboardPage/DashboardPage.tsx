@@ -41,7 +41,7 @@ function DashboardPage() {
 
             <div className="expense-counters-container">
                 <ExpenseCounterCard title="Total Spent" currency="$" theme="coins" amount={profileStore.expenseSum} changeAmount={-15} changeText="from last month" />
-                <ExpenseCounterCard title="Avg Expense" currency="$" theme="dollar" amount={profileStore.expenseSum / profileStore.expenses.length} changeAmount={15} changeText="from last month" />
+                {!isNaN(profileStore.expenseAvg) && <ExpenseCounterCard title="Avg Expense" currency="$" theme="dollar" amount={profileStore.expenseAvg} changeAmount={15} changeText="from last month" />}
                 <ExpenseCounterCard title="Total Transactions" theme="credit" amount={profileStore.expenses.length} changeAmount={0} changeText="from last month" />
             </div>
 

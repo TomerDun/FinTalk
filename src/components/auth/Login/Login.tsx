@@ -22,7 +22,7 @@ function Login() {
 
     const form = useForm({
         mode: 'uncontrolled',
-        initialValues: { email: 'rich@money.gov', password: 'lovemoney5' },
+        initialValues: { email: '', password: '' },
         // initialValues: { email: '', password: '' },
         validate: {
             email: (value) => validateEmail(value),
