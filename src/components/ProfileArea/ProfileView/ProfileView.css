@@ -19,7 +19,7 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
-    border:1px solid #B6F5D8;
+    border:1px solid var(--nav-clicked-border);
     color: var(--nav-text);
     background-color: white;
     border-radius: 0.5rem;
