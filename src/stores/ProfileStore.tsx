@@ -1,8 +1,10 @@
 // Types
 
-import { makeAutoObservable, runInAction } from "mobx"
-import { fetchProfile } from "../utils/apiUtils/profileApiUtils";
+import { makeAutoObservable, runInAction } from "mobx";
 import { fetchProfileExpenses, insertExpense } from "../utils/apiUtils/expenseApiUtils";
+import { fetchProfile } from "../utils/apiUtils/profileApiUtils";
+import { loginUser, logoutUser } from "../utils/apiUtils/authApiUtils";
+import { supabase } from "../utils/apiUtils/supabaseUtils";
 
 export type Profile = {
     id: number,
@@ -30,25 +32,28 @@ export type ExpenseInput = {
 }
 
 class ProfileStore {
-    activeProfile: Profile | null = null
+    activeProfile: Profile | null | undefined = undefined // undefined: not loaded yet | null: user is not logged in | Profile: user is logged in
     expenses: Expense[] = [];
-    loggedInUser: boolean = false;
+
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    async getActiveProfile() {
-        const newProfile = await fetchProfile();
+    // TODO: Add error handling
+    async getActiveProfile(userId: string) {     
 
+        const newProfile = await fetchProfile(userId);
 
         runInAction(() => {
             this.activeProfile = newProfile;
-        })
 
-        console.log('--updated user profile--');
+        })        
+    }
 
-
+    logoutProfile() {        
+        this.activeProfile = null;
+        console.log('--user profile loggedOut--');
     }
 
     async getExpenses() {
@@ -56,24 +61,17 @@ class ProfileStore {
 
         runInAction(() => {
             this.expenses = newExpenses;
-            console.log('--fetched expenses: ', newExpenses);
-
+            // console.log('--fetched expenses: ', newExpenses);
         })
     }
 
-    async addExpense(newExpense:ExpenseInput){
-        if(! await insertExpense(newExpense)){
+    async addExpense(newExpense: ExpenseInput) {
+        if (! await insertExpense(newExpense)) {
             throw Error("Error adding expense")
             console.error('Error adding expense');
         }
-        
-        this.getExpenses();
-    }
 
-    // !!!!!!!! dont remove - used for now in auth
-    setUserLoggedIn() {
-        this.loggedInUser = true;
-        // console.log('logged in');
+        this.getExpenses();
     }
 
     // -- Computed Values --
@@ -86,7 +84,7 @@ class ProfileStore {
         return this.expenseSum / this.expenses.length
     }
 
-    
+
 }
 
 export const profileStore = new ProfileStore()

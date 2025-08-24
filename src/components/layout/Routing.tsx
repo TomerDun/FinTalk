@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router";
 import { Box } from "@mantine/core";
-import { Login } from "../auth/Login/Login";
 import { Register } from "../auth/Register/Register";
 import { PageNotFound } from "../../pages/PageNotFound/PageNotFound";
 import DashboardPage from "../../pages/DashboardPage/DashboardPage";
 import FeedPage from "../../pages/FeedPage/FeedPage";
-import { ProtectedRoute } from "../auth/ProtectedRoute";
+import ProtectedRoute from "../auth/ProtectedRoute";
+import Login from "../auth/Login/Login";
 
 export function Routing() {
     return (

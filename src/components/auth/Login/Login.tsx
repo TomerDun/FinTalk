@@ -10,18 +10,20 @@ import {
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { loginUser } from '../../../utils/apiUtils/authUtils';
 import { validateEmail, validatePassword } from '../../../utils/formUtils';
 import classes from './Login.module.css';
 import { profileStore } from '../../../stores/ProfileStore';
+import { observer } from 'mobx-react-lite';
+import { loginUser } from '../../../utils/apiUtils/authApiUtils';
 
-export function Login() {
+function Login() {
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
+    const navigate = useNavigate();    
 
     const form = useForm({
         mode: 'uncontrolled',
-        initialValues: { email: '', password: '' },
+        initialValues: { email: 'rich@money.gov', password: 'lovemoney5' },
+        // initialValues: { email: '', password: '' },
         validate: {
             email: (value) => validateEmail(value),
             password: (value) => validatePassword(value)
@@ -34,15 +36,15 @@ export function Login() {
             if (form.validate().hasErrors) return;
 
             setIsLoading(true);
-            setTimeout(() => { }, 1000);
 
-            // const user = await loginUser()
-            const user = await loginUser(values.email,values.password)
-            profileStore.setUserLoggedIn()
+            // Auth logic
+            const data = await loginUser(values.email, values.password);            
+            await profileStore.getActiveProfile(data.user.id)
             navigate('/');
+
         } catch (error: any) {
             form.setErrors({ form: error.message });
-            console.log(error);
+            console.error('Error logging in: ', error);
         } finally {
             setIsLoading(false);
         }
@@ -102,3 +104,5 @@ export function Login() {
         </div>
     );
 }
+
+export default observer(Login)

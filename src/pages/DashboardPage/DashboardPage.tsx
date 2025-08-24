@@ -8,6 +8,7 @@ import './DashboardPage.css'
 import { IconCirclePlus } from "@tabler/icons-react";
 import SpendingByDateChart from "../../components/ChartsArea/ProfileTotalSpendingChart/SpendingByDateChart";
 import SpendingByCategoriesChart from "../../components/ChartsArea/SpendingByCategoriesChart/SpendingByCategorisChart";
+import { logoutUser } from "../../utils/apiUtils/authApiUtils";
 
 
 function DashboardPage() {
@@ -19,6 +20,7 @@ function DashboardPage() {
 
     return (
         <div className="dashboard-page">
+
 
             <div className="header-area">
                 <div className="greeting-container">

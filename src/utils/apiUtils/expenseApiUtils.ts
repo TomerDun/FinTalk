@@ -6,12 +6,9 @@ export async function fetchProfileExpenses(profileId=1) {
 
     // TODO: check what you should return in case of an erorr (what is the correct typescript way)
     if(error) {
-        console.error('Supabase error when fetching profile expenses: ', error)
+        // console.error('Supabase error when fetching profile expenses: ', error)
         return [];
-    }
-
-    console.log('--fetched expenses for profile  ', profileId);   
-    console.log(data);
+    }    
 
     formatDates(data, 'date');
     
@@ -22,9 +19,9 @@ export async function fetchProfileExpenses(profileId=1) {
 export async function insertExpense(newExpense:ExpenseInput) {
     const {error} = await supabase.from('expenses').insert(newExpense);
     if (error) {
-        console.error('Error adding expense, ', error);
+        // console.error('Error adding expense, ', error);
         return error;        
     }
-    console.log('--succesfully added expense');
+    // console.log('--succesfully added expense');
     return true;
 }
