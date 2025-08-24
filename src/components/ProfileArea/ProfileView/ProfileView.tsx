@@ -1,4 +1,4 @@
-import { IconCalendar,IconMapPin,IconBriefcase,IconUsers,IconHeart, IconMail,IconSchool } from "@tabler/icons-react"
+import { IconCalendar,IconMapPin,IconBriefcase,IconUsers,IconHeart, IconMail,IconSchool,IconPencilMinus } from "@tabler/icons-react"
 import "./ProfileView.css"
 
 interface ProfileViewProps{
@@ -11,11 +11,16 @@ interface ProfileViewProps{
     city:string
     profession:string
     status:string
+    onEdit: () => (void)
 }
 
-function ProfileView({imgUrl,userName,email,age,gender,education,city,profession,status}:ProfileViewProps){
+function ProfileView({imgUrl,userName,email,age,gender,education,city,profession,status,onEdit}:ProfileViewProps){
     return(
         <div className="profile-view-container">
+            <button className="profile-edit-button">
+                <IconPencilMinus size={12}/>
+                Edit Profile
+                </button>
             <div className="top-section">
                 <div className="profile-image-container">
                     <img src={imgUrl} alt="" />
