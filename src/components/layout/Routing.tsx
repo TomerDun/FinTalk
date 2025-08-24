@@ -14,7 +14,12 @@ export function Routing() {
         <Box flex={1}>
             <Routes>
                 {/* feed - will change to the home page address*/}
-                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/profile" element={
+                    <ProtectedRoute>
+                        <ProfilePage />
+                    </ProtectedRoute>}>
+                </Route>
+
                 <Route path="/feed" element={<FeedPage />} />
                 <Route path="/" element={
                     <ProtectedRoute>

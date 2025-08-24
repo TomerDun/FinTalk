@@ -8,28 +8,31 @@ import { useEffect } from "react";
 import ProfileView from "../../components/ProfileArea/ProfileView/ProfileView";
 import { profileStore } from "../../stores/ProfileStore";
 
-function FeedPage(){
+function FeedPage() {
 
-    useEffect(()=>{
+    useEffect(() => {
         articleStore.getArticlesWithAuthor();
-    },[])
+    }, [])
 
-    return(
+    return (
         <div className="feed-page-container">
-        <ArticleCreator/>
-        <ArticleFilter/>
-        {
-        articleStore.filteredArticles.map((article) => {
-            return <ArticleCard 
+            {profileStore.activeProfile &&
+                <ArticleCreator />
+            }
+            <ArticleFilter />
+            {
+                articleStore.filteredArticles.map((article) => {
+                    return <ArticleCard
                         key={article.id}
-                        userName={article.author?.userName} 
+                        userName={article.author?.userName}
                         imgUrl={article.author?.imgUrl}
                         createdAt={article.createdAt}
                         content={article.content}
                         category={article.category}
-                        subCategory={article.subCategory}/>})}
+                        subCategory={article.subCategory} />
+                })}
         </div>
     )
-} 
+}
 
 export default observer(FeedPage)
