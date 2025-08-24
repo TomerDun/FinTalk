@@ -1,9 +1,11 @@
 import { Burger, Container, Group, Image, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconChartBar, IconHome, IconLogin2, IconLogout2, IconUsers } from '@tabler/icons-react';
+import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';
 import finTalkLogo from '../../assets/fin-talk-logo.png';
 import { profileStore } from '../../stores/ProfileStore';
+import { logoutUser } from '../../utils/apiUtils/authUtils';
 import { CustomNavLink } from './CustomNavLink';
 import classes from './Navbar.module.css';
 
@@ -22,10 +24,22 @@ const links: Item[] = [
 const loginItem = { link: '/login', label: 'Login', icon: <IconLogin2 size={20} /> }
 const logoutItem = { link: '/login', label: 'Logout', icon: <IconLogout2 size={20} /> }
 
-export function Navbar() {
+function Navbar() {
 
     const [opened, { toggle }] = useDisclosure(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    console.log('profile: ', profileStore.isLoggedIn);
+
+    function handleClick(link: string) {
+        toggle();
+        navigate(link);
+    }
+
+    async function handleLogout() {
+        await logoutUser();
+        // profileStore.logoutProfile();
+    }
 
     return (
         <header className={classes.header}>
@@ -46,11 +60,11 @@ export function Navbar() {
                             item={link}
                             opened={opened} toggle={toggle} />
                     ))}
-                    {profileStore.loggedInUser
-                        ? <div onClick={() => profileStore.setUserLoggedOut()}>
-                            <CustomNavLink item={logoutItem} opened={opened} toggle={toggle} />
-                        </div>
-                        : <CustomNavLink item={loginItem} opened={opened} toggle={toggle} />
+                    {profileStore.isLoggedIn
+                            ? <div onClick={async () => await handleLogout()}>
+                                <CustomNavLink item={logoutItem} opened={opened} toggle={toggle} />
+                            </div>
+                            : <CustomNavLink item={loginItem} opened={opened} toggle={toggle} />
                     }
                 </Group>
 
@@ -69,35 +83,28 @@ export function Navbar() {
                             <Menu.Item
                                 key={link.label}
                                 leftSection={link.icon}
-                                onClick={() => {
-                                    toggle();
-                                    navigate(link.link)
-                                }}
+                                onClick={() => handleClick(link.link)}
                             >
                                 {link.label}
                             </Menu.Item>))}
-                        {profileStore.loggedInUser
-                                ?<Menu.Item
-                                    key={logoutItem.label}
-                                    leftSection={logoutItem.icon}
-                                    onClick={() => {
-                                        toggle();
-                                        profileStore.setUserLoggedOut()
-                                        navigate(logoutItem.link)
-                                    }}
-                                >
-                                    {logoutItem.label}
-                                </Menu.Item>
-                                :<Menu.Item
-                                    key={loginItem.label}
-                                    leftSection={loginItem.icon}
-                                    onClick={() => {
-                                        toggle();
-                                        navigate(loginItem.link)
-                                    }}
-                                >
-                                    {loginItem.label}
-                                </Menu.Item>
+                        {profileStore.isLoggedIn
+                            ? <Menu.Item
+                                key={logoutItem.label}
+                                leftSection={logoutItem.icon}
+                                onClick={async () => {
+                                    handleClick(logoutItem.link);
+                                    await handleLogout();
+                                }}
+                            >
+                                {logoutItem.label}
+                            </Menu.Item>
+                            : <Menu.Item
+                                key={loginItem.label}
+                                leftSection={loginItem.icon}
+                                onClick={() => handleClick(loginItem.link)}
+                            >
+                                {loginItem.label}
+                            </Menu.Item>
                         }
                     </Menu.Dropdown>
                 </Menu>
@@ -105,3 +112,5 @@ export function Navbar() {
         </header >
     );
 }
+
+export default observer(Navbar)
