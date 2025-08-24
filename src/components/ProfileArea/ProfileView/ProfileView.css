@@ -1,0 +1,95 @@
+.profile-view-container{
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: auto;
+    width: 550px;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    background-color: var(--bg-card);
+    gap:1rem;
+}
+
+.profile-edit-button{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border:1px solid var(--nav-clicked-border);
+    color: var(--nav-text);
+    background-color: white;
+    border-radius: 0.5rem;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.profile-edit-button:hover{
+    background-color: var(--nav-hover);
+}
+
+.profile-view-container > .top-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-view-container > .top-section > .profile-image-container{
+    width: 100px;
+    height: 100px;
+}
+
+.profile-view-container > .top-section > .name-email-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.name-email-container> .name-container{
+    text-align: center;
+    font-size: larger;
+    font-weight: 700;
+}
+
+.name-email-container> .email-container{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-info);
+}
+
+.info-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.field-set-couple{
+    display: flex;
+    gap: 1rem;
+}
+
+.info-field-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-main);
+}
+
+.info-field-container > .field-icon-container{
+    color:var(--text-info)
+}
+
+.field-set > .field-title{
+    font-weight: 500;
+    color:var(--text-info)
+}
