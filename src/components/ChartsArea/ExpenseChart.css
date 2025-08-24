@@ -7,6 +7,7 @@
     border-radius: 4px;
     box-shadow: var(--shadow-sm);
     transition-duration: 300ms;
+    min-height: max-content;
 
 }
 
@@ -21,4 +22,16 @@
 .chart-content {
     width: 95%;
     margin: auto;
+}
+
+.no-data-container {    
+    text-align: center;
+    color: var(--text-negative);
+
+}
+
+.filter-row {
+    display: flex;
+    margin-bottom: 1rem;
+    gap: 1rem;
 }

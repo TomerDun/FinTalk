@@ -43,3 +43,15 @@ export async function insertProfile(newProfile: ProfileToDB) {
 
 
 // update existing profile 
+export async function fetchProfileCount() {
+    const { count, error } = await supabase.from('profiles').select('*', {count: 'exact'})
+
+    if (error) {
+        console.error('Supabase error when fetching profile: ', error)
+        throw new Error('Error fetching profile count')
+    }    
+
+    console.log(count);
+    
+    return count;
+}

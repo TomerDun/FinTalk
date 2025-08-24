@@ -1,5 +1,6 @@
 import type { Expense } from "../stores/ProfileStore";
-import { fillMissingCategories, formatExpensesByDate } from "./hooks/chartFormatUtils";
+import { fillMissingCategories, formatExpensesByDate, generatePieSeries } from "./chartFormatUtils";
+// Types
 
 export type ExpensesByDates = {
     [key: string]: number;
@@ -16,6 +17,17 @@ export type ExpensesByDateAndCategory = {
     date: string;
     [category: string]: number | string; // dynamic category keys
 };
+
+export type SeriesItem = {
+  name: string;
+  color: string;
+};
+
+export type PieSeriesItem = {
+  name: string,
+  value: number,
+  color: string,
+}
 
 
 // total amount by date
@@ -34,7 +46,7 @@ export function groupExpensesByDate(expenses: Expense[]): ExpensesByDateData[] {
 
 
 // Total amount by date and category
-export function groupExpensesByDateAndCateogry(expenses: Expense[], fill=true): ExpensesByDateAndCategory[] {
+export function groupExpensesByDateAndCateogry(expenses: Expense[], fill = true): ExpensesByDateAndCategory[] {
     const groupedMap = new Map<string, Record<string, number>>();
 
     for (const exp of expenses) {
@@ -52,7 +64,20 @@ export function groupExpensesByDateAndCateogry(expenses: Expense[], fill=true): 
     }));
 
     if (fill) {
-        return fillMissingCategories(output);        
+        return fillMissingCategories(output);
     }
     return output;
+}
+
+// Total in categories for pie chart
+export function groupByCategoriesOnly(expenses: Expense[]): PieSeriesItem[] {
+    // Aggregate totals per category
+    const categoryTotals = expenses.reduce<Record<string, number>>((acc, exp) => {
+        acc[exp.category] = (acc[exp.category] || 0) + exp.amount;        
+        return acc;
+    }, {});
+
+    return generatePieSeries(categoryTotals);
+
+
 }
