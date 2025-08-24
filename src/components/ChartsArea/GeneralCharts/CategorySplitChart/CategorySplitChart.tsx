@@ -22,7 +22,10 @@ export default function CategorySplitChart({ expenses }: { expenses: Expense[] }
                         tooltipDataSource="segment"                                                                                                                   
                         withLabels
                         labelsPosition="outside"
-                        labelsType="percent"
+                        labelsType="percent"                                                
+                        size={220}
+                        // tooltipAnimationDuration={20}
+                        tooltipProps={{animationDuration: 500, isAnimationActive: true}}
                     />
                 </div>
             }
