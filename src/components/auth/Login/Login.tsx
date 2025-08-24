@@ -14,14 +14,11 @@ import { validateEmail, validatePassword } from '../../../utils/formUtils';
 import classes from './Login.module.css';
 import { profileStore } from '../../../stores/ProfileStore';
 import { observer } from 'mobx-react-lite';
+import { loginUser } from '../../../utils/apiUtils/authApiUtils';
 
 function Login() {
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
-
-    console.log('Login');
-    console.log('activeProfile', profileStore.activeProfile);
-    console.log('isLoggedIn', profileStore.isLoggedIn);
+    const navigate = useNavigate();    
 
     const form = useForm({
         mode: 'uncontrolled',
@@ -40,12 +37,14 @@ function Login() {
 
             setIsLoading(true);
 
-            await profileStore.loginProfile(values.email, values.password);
-
+            // Auth logic
+            const data = await loginUser(values.email, values.password);            
+            await profileStore.getActiveProfile(data.user.id)
             navigate('/');
+
         } catch (error: any) {
             form.setErrors({ form: error.message });
-            console.log(error);
+            console.error('Error logging in: ', error);
         } finally {
             setIsLoading(false);
         }

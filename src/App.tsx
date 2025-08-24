@@ -6,10 +6,12 @@ import { profileStore } from './stores/ProfileStore'
 import { useEffect, useState } from 'react'
 import { supabase } from './utils/apiUtils/supabaseUtils'
 import { checkUser } from './utils/apiUtils/authApiUtils'
+import { useNavigate } from 'react-router'
+
 
 function App() {
 
-    const [isLoading, setIsLoading] = useState(true)
+    const navigate = useNavigate();
 
     useEffect(() => {
         checkUserLoggedIn();
@@ -18,8 +20,22 @@ function App() {
     async function checkUserLoggedIn() {
         const user = await checkUser();
 
-        console.log(user);
 
+        // Not logged in - redirect
+        if (!user) {
+
+            profileStore.logoutProfile();
+            navigate('/login')
+        }
+
+        // Logged in
+        if (user) {
+            // TODO: Add error handling here!
+
+            profileStore.getActiveProfile(user.id);
+        }
+
+        // setCheckedForUser(true);
     }
 
     // useEffect(() => {

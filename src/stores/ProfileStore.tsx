@@ -3,7 +3,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { fetchProfileExpenses, insertExpense } from "../utils/apiUtils/expenseApiUtils";
 import { fetchProfile } from "../utils/apiUtils/profileApiUtils";
-import { loginUser, logoutUser } from "../utils/apiUtils/authUtils";
+import { loginUser, logoutUser } from "../utils/apiUtils/authApiUtils";
 import { supabase } from "../utils/apiUtils/supabaseUtils";
 
 export type Profile = {
@@ -32,47 +32,26 @@ export type ExpenseInput = {
 }
 
 class ProfileStore {
-    activeProfile: Profile | null = null
+    activeProfile: Profile | null | undefined = undefined // undefined: not loaded yet | null: user is not logged in | Profile: user is logged in
     expenses: Expense[] = [];
-    isLoggedIn = false;
 
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    async getActiveProfile(userId: string) {
-        console.log('profileStore - getActiveProfile, user ID: ', userId);
+    // TODO: Add error handling
+    async getActiveProfile(userId: string) {     
 
         const newProfile = await fetchProfile(userId);
-        // const { data, error } = await supabase.auth.getSession();
-        // console.log(data);
-
 
         runInAction(() => {
             this.activeProfile = newProfile;
-            this.isLoggedIn = true;
 
-        })
-
-        console.log('--updated user profile--');
+        })        
     }
 
-    async loginProfile(email: string, password: string) {
-        try {
-            const user = await loginUser(email, password);
-
-            runInAction(() => {
-                this.isLoggedIn = true;
-            })
-            console.log('--user profile logged in--');
-        } catch (error) {
-            console.log('profileStore - login failed: ', error);
-        }
-    }
-
-    logoutProfile() {
-        this.isLoggedIn = false;
+    logoutProfile() {        
         this.activeProfile = null;
         console.log('--user profile loggedOut--');
     }

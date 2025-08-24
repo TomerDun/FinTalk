@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';
 import finTalkLogo from '../../assets/fin-talk-logo.png';
 import { profileStore } from '../../stores/ProfileStore';
-import { logoutUser } from '../../utils/apiUtils/authUtils';
+import { logoutUser } from '../../utils/apiUtils/authApiUtils';
 import { CustomNavLink } from './CustomNavLink';
 import classes from './Navbar.module.css';
 
@@ -27,18 +27,17 @@ const logoutItem = { link: '/login', label: 'Logout', icon: <IconLogout2 size={2
 function Navbar() {
 
     const [opened, { toggle }] = useDisclosure(false);
-    const navigate = useNavigate();
-
-    console.log('profile: ', profileStore.isLoggedIn);
+    const navigate = useNavigate();    
 
     function handleClick(link: string) {
         toggle();
         navigate(link);
     }
 
+    // TODO: change redirect from login page to feed page
     async function handleLogout() {
         await logoutUser();
-        // profileStore.logoutProfile();
+        profileStore.logoutProfile();
     }
 
     return (
@@ -60,7 +59,7 @@ function Navbar() {
                             item={link}
                             opened={opened} toggle={toggle} />
                     ))}
-                    {profileStore.isLoggedIn
+                    {profileStore.activeProfile
                             ? <div onClick={async () => await handleLogout()}>
                                 <CustomNavLink item={logoutItem} opened={opened} toggle={toggle} />
                             </div>
@@ -87,7 +86,7 @@ function Navbar() {
                             >
                                 {link.label}
                             </Menu.Item>))}
-                        {profileStore.isLoggedIn
+                        {profileStore.activeProfile
                             ? <Menu.Item
                                 key={logoutItem.label}
                                 leftSection={logoutItem.icon}

@@ -9,7 +9,6 @@ export async function fetchProfile(userId="c7f9877b-7b48-4b13-a2e7-9c83f24bfd63"
         return error;
     }
     console.log('--fetched profile with id ', userId);   
-    console.log(data);
     
     return data[0];
 }

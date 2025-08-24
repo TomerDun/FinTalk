@@ -8,10 +8,7 @@ export async function fetchProfileExpenses(profileId=1) {
     if(error) {
         // console.error('Supabase error when fetching profile expenses: ', error)
         return [];
-    }
-
-    console.log('--fetched expenses for profile  ', profileId);   
-    console.log(data);
+    }    
 
     formatDates(data, 'date');
     
